@@ -53,6 +53,11 @@ const i18n = {
     modeLabel: "Chế độ luyện tập",
     topicCount: "chủ đề",
     itemCount: "mục luyện",
+    login: "Đăng nhập",
+    register: "Đăng ký",
+    logout: "Đăng xuất",
+    account: "Tài khoản",
+    admin: "Admin",
   },
   zh: {
     brandSubtitle: "给越南学生使用的中文练习",
@@ -105,6 +110,11 @@ const i18n = {
     modeLabel: "练习模式",
     topicCount: "个主题",
     itemCount: "个练习",
+    login: "登录",
+    register: "注册",
+    logout: "退出登录",
+    account: "我的账户",
+    admin: "管理员",
   },
 };
 
@@ -650,24 +660,46 @@ function renderChrome() {
   const mobileAdmin = $("#mobileAdminBtn");
   const sidebarLoginBtn = $("#sidebarLoginBtn");
   const sidebarRegisterBtn = $("#sidebarRegisterBtn");
+
+  const navRoadmapBtn = $("#navRoadmapBtn");
+  const navHskBtn = $("#navHskBtn");
+  const navDailyBtn = $("#navDailyBtn");
+  const mobileRoadmapBtn = $("#mobileRoadmapBtn");
+  const mobileHskBtn = $("#mobileHskBtn");
+  const mobileDailyBtn = $("#mobileDailyBtn");
+
+  if (navRoadmapBtn) navRoadmapBtn.textContent = t("path");
+  if (navHskBtn) navHskBtn.textContent = t("hskTitle");
+  if (navDailyBtn) navDailyBtn.textContent = t("dailyTitle");
+
+  if (mobileRoadmapBtn) mobileRoadmapBtn.innerHTML = `${t("path")} <span class="arrow">›</span>`;
+  if (mobileHskBtn) mobileHskBtn.innerHTML = `${t("hskTitle")} <span class="arrow">›</span>`;
+  if (mobileDailyBtn) mobileDailyBtn.innerHTML = `${t("dailyTitle")} <span class="arrow">›</span>`;
+
   const canViewAdmin = isAdminUser();
-  if (navAdmin) navAdmin.classList.toggle("hidden", !canViewAdmin);
-  if (mobileAdmin) mobileAdmin.classList.toggle("hidden", !canViewAdmin);
+  if (navAdmin) {
+    navAdmin.textContent = t("admin");
+    navAdmin.classList.toggle("hidden", !canViewAdmin);
+  }
+  if (mobileAdmin) {
+    mobileAdmin.innerHTML = `${t("admin")} <span class="arrow">›</span>`;
+    mobileAdmin.classList.toggle("hidden", !canViewAdmin);
+  }
   if (!canViewAdmin && state.screen === "admin") {
     renderHome();
     setScreen("home");
   }
 
   if (state.user) {
-    if (loginBtn) loginBtn.textContent = state.user.fullName || "Tài khoản";
-    if (registerBtn) registerBtn.textContent = "Đăng xuất";
-    if (mobileLoginBtn) mobileLoginBtn.textContent = state.user.fullName || "Tài khoản";
-    if (mobileRegisterBtn) mobileRegisterBtn.textContent = "Đăng xuất";
+    if (loginBtn) loginBtn.textContent = state.user.fullName || t("account");
+    if (registerBtn) registerBtn.textContent = t("logout");
+    if (mobileLoginBtn) mobileLoginBtn.textContent = state.user.fullName || t("account");
+    if (mobileRegisterBtn) mobileRegisterBtn.textContent = t("logout");
   } else {
-    if (loginBtn) loginBtn.textContent = "Đăng nhập";
-    if (registerBtn) registerBtn.textContent = "Đăng ký";
-    if (mobileLoginBtn) mobileLoginBtn.textContent = "Đăng nhập";
-    if (mobileRegisterBtn) mobileRegisterBtn.textContent = "Đăng ký";
+    if (loginBtn) loginBtn.textContent = t("login");
+    if (registerBtn) registerBtn.textContent = t("register");
+    if (mobileLoginBtn) mobileLoginBtn.textContent = t("login");
+    if (mobileRegisterBtn) mobileRegisterBtn.textContent = t("register");
   }
 
   if (loginBtn) {
@@ -729,6 +761,7 @@ const dailyRoadmap = [
 ];
 
 function renderRoadmap() {
+  const isVi = state.lang === "vi";
   const completedDaysCount = dailyRoadmap.filter(d => {
     const id = d.lessonId || d.themeId;
     return state.completed.has(id);
@@ -741,8 +774,8 @@ function renderRoadmap() {
       <!-- Left Column: Flowing pathway -->
       <div class="roadmap-panel">
         <div class="roadmap-header-title">
-          <h2>Lộ trình học tập</h2>
-          <p>Hoàn thành mỗi bài học hàng ngày để mở khóa nội dung tiếp theo</p>
+          <h2>${isVi ? "Lộ trình học tập" : "学习路径"}</h2>
+          <p>${isVi ? "Hoàn thành mỗi bài học hàng ngày để mở khóa nội dung tiếp theo" : "完成每日课程以解锁下一个内容"}</p>
         </div>
         
         <div class="roadmap-timeline">
@@ -779,8 +812,8 @@ function renderRoadmap() {
                 
                 <div class="timeline-content-col">
                   <div class="timeline-meta">
-                    <span class="day-badge">Ngày ${item.day}</span>
-                    <span class="progress-info">${progressText} câu đã học</span>
+                    <span class="day-badge">${isVi ? `Ngày ${item.day}` : `第 ${item.day} 天`}</span>
+                    <span class="progress-info">${progressText} ${isVi ? "câu đã học" : "个句子已学"}</span>
                   </div>
                   <h3 class="lesson-label">${item.label}</h3>
                   <p class="lesson-title">${item.title}</p>
@@ -788,7 +821,7 @@ function renderRoadmap() {
                 
                 <div class="timeline-action-col">
                   <button class="btn-timeline-action ${statusClass}" type="button" data-roadmap-day="${item.day}" data-lesson-id="${item.lessonId || ''}" data-theme-id="${item.themeId || ''}" ${isLocked ? "disabled" : ""}>
-                    ${isCompleted ? "Ôn tập" : isCurrentActive ? "Học ngay" : "Chưa mở khóa"}
+                    ${isCompleted ? (isVi ? "Ôn tập" : "复习") : isCurrentActive ? (isVi ? "Học ngay" : "立即学习") : (isVi ? "Chưa mở khóa" : "未解锁")}
                   </button>
                 </div>
               </div>
@@ -800,7 +833,7 @@ function renderRoadmap() {
       <!-- Right Column: Sidebar Stats -->
       <aside class="roadmap-sidebar">
         <div class="sidebar-card stats-card">
-          <h3>Thống kê</h3>
+          <h3>${isVi ? "Thống kê" : "统计"}</h3>
           <div class="stats-underline"></div>
           
           <div class="stat-item">
@@ -813,8 +846,8 @@ function renderRoadmap() {
               </svg>
             </div>
             <div class="stat-copy">
-              <span>Tiến độ</span>
-              <strong>${completedDaysCount}/${dailyRoadmap.length} ngày</strong>
+              <span>${isVi ? "Tiến độ" : "进度"}</span>
+              <strong>${completedDaysCount}/${dailyRoadmap.length} ${isVi ? "ngày" : "天"}</strong>
             </div>
           </div>
           
@@ -826,7 +859,7 @@ function renderRoadmap() {
               </svg>
             </div>
             <div class="stat-copy">
-              <span>Bài học hoàn thành</span>
+              <span>${isVi ? "Bài học hoàn thành" : "完成的课程"}</span>
               <strong>${completedCount}</strong>
             </div>
           </div>
@@ -838,8 +871,8 @@ function renderRoadmap() {
               </svg>
             </div>
             <div class="stat-copy">
-              <span>Chuỗi học</span>
-              <strong>${completedCount} ngày</strong>
+              <span>${isVi ? "Chuỗi học" : "学习天数"}</span>
+              <strong>${completedCount} ${isVi ? "ngày" : "天"}</strong>
             </div>
           </div>
         </div>
@@ -847,10 +880,10 @@ function renderRoadmap() {
         <div class="sidebar-card cta-card">
           <div class="cta-info">
             <div class="cta-icon">✍️</div>
-            <p>Hãy đăng ký / đăng nhập để lưu tiến độ học tập của bạn.</p>
+            <p>${isVi ? "Hãy đăng ký / đăng nhập để lưu tiến độ học tập của bạn." : "请注册/登录以保存您的学习进度。"}</p>
           </div>
-          <button class="btn-sidebar-login" id="sidebarLoginBtn" type="button" disabled title="Đăng nhập/Đăng ký tạm thời bị vô hiệu hóa">Đăng nhập</button>
-          <button class="btn-sidebar-register" id="sidebarRegisterBtn" type="button" disabled title="Đăng nhập/Đăng ký tạm thời bị vô hiệu hóa">Đăng ký</button>
+          <button class="btn-sidebar-login" id="sidebarLoginBtn" type="button" disabled title="Đăng nhập/Đăng ký tạm thời bị vô hiệu hóa">${t("login")}</button>
+          <button class="btn-sidebar-register" id="sidebarRegisterBtn" type="button" disabled title="Đăng nhập/Đăng ký tạm thời bị vô hiệu hóa">${t("register")}</button>
         </div>
         
       </aside>
@@ -859,14 +892,15 @@ function renderRoadmap() {
 }
 
 async function loadAdminUsers() {
+  const isVi = state.lang === "vi";
   if (!state.adminKey) {
-    state.adminStatus = "Nhập admin key để tải danh sách người dùng.";
+    state.adminStatus = isVi ? "Nhập admin key để tải danh sách người dùng." : "输入 admin key 以加载用户列表。";
     state.adminUsers = [];
     renderAdmin();
     return;
   }
 
-  state.adminStatus = "Đang tải danh sách người dùng...";
+  state.adminStatus = isVi ? "Đang tải danh sách người dùng..." : "正在加载用户列表...";
   renderAdmin();
   try {
     const data = await apiRequest("/api/admin/users", {
@@ -874,7 +908,7 @@ async function loadAdminUsers() {
       headers: { "X-Admin-Key": state.adminKey },
     });
     state.adminUsers = data.users || [];
-    state.adminStatus = `Đã tải ${state.adminUsers.length} người dùng.`;
+    state.adminStatus = isVi ? `Đã tải ${state.adminUsers.length} người dùng.` : `已加载 ${state.adminUsers.length} 个用户。`;
   } catch (error) {
     state.adminUsers = [];
     state.adminStatus = error.message;
@@ -883,6 +917,7 @@ async function loadAdminUsers() {
 }
 
 function renderAdmin() {
+  const isVi = state.lang === "vi";
   const rows = state.adminUsers.map((user) => `
     <tr data-user-id="${escapeAttr(user.id)}">
       <td>
@@ -900,15 +935,15 @@ function renderAdmin() {
       <td>
         <label class="admin-active-toggle">
           <input type="checkbox" data-field="isActive" ${user.isActive ? "checked" : ""} />
-          <span>${user.isActive ? "Đang mở" : "Đã khóa"}</span>
+          <span>${user.isActive ? (isVi ? "Đang mở" : "已启用") : (isVi ? "Đã khóa" : "已锁定")}</span>
         </label>
       </td>
       <td>${formatDateTime(user.createdAt)}</td>
       <td>${formatDateTime(user.lastLoginAt)}</td>
       <td>
         <div class="admin-row-actions">
-          <button class="admin-save-user" type="button">Lưu</button>
-          <button class="admin-delete-user" type="button">Xóa</button>
+          <button class="admin-save-user" type="button">${isVi ? "Lưu" : "保存"}</button>
+          <button class="admin-delete-user" type="button">${isVi ? "Xóa" : "删除"}</button>
         </div>
       </td>
     </tr>
@@ -918,18 +953,18 @@ function renderAdmin() {
     <div class="admin-layout">
       <section class="admin-hero">
         <div>
-          <span class="admin-eyebrow">Quản trị</span>
-          <h1>Người dùng đăng ký</h1>
-          <p>Theo dõi tài khoản đã đăng ký và quản lý trạng thái học viên từ database Neon PostgreSQL.</p>
+          <span class="admin-eyebrow">${isVi ? "Quản trị" : "管理"}</span>
+          <h1>${isVi ? "Người dùng đăng ký" : "注册用户"}</h1>
+          <p>${isVi ? "Theo dõi tài khoản đã đăng ký và quản lý trạng thái học viên từ database Neon PostgreSQL." : "从 Neon PostgreSQL 数据库跟踪已注册的帐户并管理学员状态。"}</p>
         </div>
-        <button class="admin-refresh-btn" id="adminRefreshBtn" type="button">Tải lại</button>
+        <button class="admin-refresh-btn" id="adminRefreshBtn" type="button">${isVi ? "Tải lại" : "重新加载"}</button>
       </section>
 
       <section class="admin-key-panel">
         <label for="adminKeyInput">Admin key</label>
         <div class="admin-key-row">
-          <input id="adminKeyInput" type="password" value="${escapeAttr(state.adminKey)}" placeholder="Nhập ADMIN_KEY của server" />
-          <button id="adminLoadUsersBtn" type="button">Kết nối</button>
+          <input id="adminKeyInput" type="password" value="${escapeAttr(state.adminKey)}" placeholder="${isVi ? "Nhập ADMIN_KEY của server" : "输入服务器的 ADMIN_KEY"}" />
+          <button id="adminLoadUsersBtn" type="button">${isVi ? "Kết nối" : "连接"}</button>
         </div>
         <p class="admin-status ${state.adminStatus.includes("không") || state.adminStatus.includes("lỗi") || state.adminStatus.includes("hợp lệ") ? "error" : ""}">${escapeAttr(state.adminStatus)}</p>
       </section>
@@ -939,17 +974,17 @@ function renderAdmin() {
           <table class="admin-users-table">
             <thead>
               <tr>
-                <th>Họ tên</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Trạng thái</th>
-                <th>Ngày tạo</th>
-                <th>Đăng nhập cuối</th>
-                <th>Thao tác</th>
+                <th>${isVi ? "Họ tên" : "姓名"}</th>
+                <th>${isVi ? "Email" : "电子邮箱"}</th>
+                <th>${isVi ? "Role" : "角色"}</th>
+                <th>${isVi ? "Trạng thái" : "状态"}</th>
+                <th>${isVi ? "Ngày tạo" : "创建日期"}</th>
+                <th>${isVi ? "Đăng nhập cuối" : "最后登录"}</th>
+                <th>${isVi ? "Thao tác" : "操作"}</th>
               </tr>
             </thead>
             <tbody>
-              ${rows || `<tr><td colspan="7" class="admin-empty">Chưa có dữ liệu người dùng.</td></tr>`}
+              ${rows || `<tr><td colspan="7" class="admin-empty">${isVi ? "Chưa có dữ liệu người dùng." : "暂无用户数据。"}</td></tr>`}
             </tbody>
           </table>
         </div>
@@ -964,18 +999,19 @@ function showModal(type) {
   modalDiv.className = "auth-modal-overlay";
 
   const isLogin = type === "login";
+  const isVi = state.lang === "vi";
   modalDiv.innerHTML = `
     <div class="auth-modal-content">
       <button class="auth-modal-close" id="closeAuthModal" type="button">&times;</button>
       <div class="auth-modal-logo">中</div>
-      <h2>${isLogin ? "Đăng nhập" : "Đăng ký tài khoản"}</h2>
-      <p class="auth-modal-sub">${isLogin ? "Chào mừng bạn quay trở lại!" : "Bắt đầu hành trình học tiếng Trung ngay hôm nay."}</p>
+      <h2>${isLogin ? (isVi ? "Đăng nhập" : "登录") : (isVi ? "Đăng ký tài khoản" : "注册账户")}</h2>
+      <p class="auth-modal-sub">${isLogin ? (isVi ? "Chào mừng bạn quay trở lại!" : "欢迎回来！") : (isVi ? "Bắt đầu hành trình học tiếng Trung ngay hôm nay." : "立即开始您的中文学习之旅。")}</p>
       
       <form id="authForm" onsubmit="event.preventDefault();">
         ${!isLogin ? `
         <div class="form-group">
-          <label for="authName">Họ và tên</label>
-          <input type="text" id="authName" placeholder="Nguyễn Văn A" required />
+          <label for="authName">${isVi ? "Họ và tên" : "姓名"}</label>
+          <input type="text" id="authName" placeholder="${isVi ? "Nguyễn Văn A" : "张三"}" required />
         </div>
         ` : ""}
         <div class="form-group">
@@ -983,22 +1019,22 @@ function showModal(type) {
           <input type="email" id="authEmail" placeholder="example@gmail.com" required />
         </div>
         <div class="form-group">
-          <label for="authPassword">Mật khẩu</label>
+          <label for="authPassword">${isVi ? "Mật khẩu" : "密码"}</label>
           <input type="password" id="authPassword" placeholder="••••••••" required />
         </div>
         ${!isLogin ? `
         <div class="form-group checkbox-group">
           <input type="checkbox" id="authTerms" required />
-          <label for="authTerms">Tôi đồng ý với các điều khoản dịch vụ</label>
+          <label for="authTerms">${isVi ? "Tôi đồng ý với các điều khoản dịch vụ" : "我同意服务条款"}</label>
         </div>
         ` : ""}
         <p class="auth-form-message" id="authFormMessage" role="status"></p>
-        <button type="submit" class="btn-auth-submit">${isLogin ? "Đăng nhập" : "Đăng ký"}</button>
+        <button type="submit" class="btn-auth-submit">${isLogin ? (isVi ? "Đăng nhập" : "登录") : (isVi ? "Đăng ký" : "注册")}</button>
       </form>
       
       <div class="auth-modal-footer">
-        <span>${isLogin ? "Chưa có tài khoản?" : "Đã có tài khoản?"}</span>
-        <button class="btn-auth-switch" id="authSwitchBtn" type="button">${isLogin ? "Đăng ký ngay" : "Đăng nhập"}</button>
+        <span>${isLogin ? (isVi ? "Chưa có tài khoản?" : "还没有账户？") : (isVi ? "Đã có tài khoản?" : "已有账户？")}</span>
+        <button class="btn-auth-switch" id="authSwitchBtn" type="button">${isLogin ? (isVi ? "Đăng ký ngay" : "立即注册") : (isVi ? "Đăng nhập" : "登录")}</button>
       </div>
     </div>
   `;
@@ -1024,7 +1060,7 @@ function showModal(type) {
     message.textContent = "";
     message.className = "auth-form-message";
     submitBtn.disabled = true;
-    submitBtn.textContent = isLogin ? "Đang đăng nhập..." : "Đang đăng ký...";
+    submitBtn.textContent = isLogin ? (isVi ? "Đang đăng nhập..." : "正在登录...") : (isVi ? "Đang đăng ký..." : "正在注册...");
 
     try {
       const data = await apiRequest(isLogin ? "/api/login" : "/api/register", {
@@ -1034,7 +1070,7 @@ function showModal(type) {
       state.user = data.user;
       saveState();
       renderChrome();
-      message.textContent = isLogin ? "Đăng nhập thành công." : "Đăng ký thành công.";
+      message.textContent = isLogin ? (isVi ? "Đăng nhập thành công." : "登录成功。") : (isVi ? "Đăng ký thành công." : "注册成功。");
       message.classList.add("success");
       setTimeout(() => modalDiv.remove(), 500);
     } catch (error) {
@@ -1042,7 +1078,7 @@ function showModal(type) {
       message.classList.add("error");
     } finally {
       submitBtn.disabled = false;
-      submitBtn.textContent = isLogin ? "Đăng nhập" : "Đăng ký";
+      submitBtn.textContent = isLogin ? (isVi ? "Đăng nhập" : "登录") : (isVi ? "Đăng ký" : "注册");
     }
   };
 }
@@ -1051,6 +1087,7 @@ function showQuitModal() {
   const modalDiv = document.createElement("div");
   modalDiv.id = "quitModal";
   modalDiv.className = "quit-modal-overlay";
+  const isVi = state.lang === "vi";
 
   modalDiv.innerHTML = `
     <div class="quit-modal-content">
@@ -1103,12 +1140,12 @@ function showQuitModal() {
         </svg>
       </div>
       
-      <h2>Khoan, đừng đi!</h2>
-      <p class="quit-modal-sub">Chỉ còn 2 phút thôi! Bạn có chắc chắn muốn thoát không?</p>
+      <h2>${isVi ? "Khoan, đừng đi!" : "等一下，别走！"}</h2>
+      <p class="quit-modal-sub">${isVi ? "Chỉ còn 2 phút thôi! Bạn có chắc chắn muốn thoát không?" : "只需再学习2分钟！你确定要退出吗？"}</p>
       
       <div class="quit-modal-buttons">
-        <button id="btnKeepLearning" class="btn-keep-learning" type="button">HỌC TIẾP</button>
-        <button id="btnQuitLearning" class="btn-quit-learning" type="button">KẾT THÚC</button>
+        <button id="btnKeepLearning" class="btn-keep-learning" type="button">${isVi ? "HỌC TIẾP" : "继续学习"}</button>
+        <button id="btnQuitLearning" class="btn-quit-learning" type="button">${isVi ? "KẾT THÚC" : "结束"}</button>
       </div>
     </div>
   `;
@@ -1140,15 +1177,17 @@ function renderGlobalFooter() {
   const footerNode = $("#globalFooter");
   if (!footerNode) return;
 
+  const isVi = state.lang === "vi";
+
   if (state.screen === "home" || state.screen === "roadmap" || state.screen === "course") {
     footerNode.innerHTML = `
         <div class="footer-container">
           <div class="footer-brand-col">
             <div class="footer-logo">
               <div class="footer-logo-circle">中</div>
-              <span class="footer-logo-text">Học Tiếng Trung</span>
+              <span class="footer-logo-text">${isVi ? "Học Tiếng Trung" : "学习中文"}</span>
             </div>
-            <p class="footer-tagline">Học dễ hiểu - Nhớ lâu - Ứng dụng ngay</p>
+            <p class="footer-tagline">${isVi ? "Học dễ hiểu - Nhớ lâu - Ứng dụng ngay" : "易学 - 难忘 - 即学即用"}</p>
             <div class="footer-socials">
               <a href="#" class="social-icon social-fb" aria-label="Facebook">
                 <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M9 8H7v3h2v9h4v-9h3.6l.4-3H13V6c0-.5.5-1 1-1h2V1h-3A4.5 4.5 0 0 0 9 5.5V8z"/></svg>
@@ -1166,25 +1205,25 @@ function renderGlobalFooter() {
           </div>
           
           <div class="footer-links-col">
-            <h4 class="footer-heading">KHÁM PHÁ</h4>
+            <h4 class="footer-heading">${isVi ? "KHÁM PHÁ" : "探索"}</h4>
             <ul class="footer-list">
-              <li><a href="#" data-footer-nav="course">Khóa học</a></li>
-              <li><a href="#" data-footer-nav="course">Lộ trình</a></li>
-              <li><a href="#" data-footer-nav="blog">Blog</a></li>
+              <li><a href="#" data-footer-nav="course">${isVi ? "Khóa học" : "课程"}</a></li>
+              <li><a href="#" data-footer-nav="course">${isVi ? "Lộ trình" : "路线"}</a></li>
+              <li><a href="#" data-footer-nav="blog">${isVi ? "Blog" : "博客"}</a></li>
             </ul>
           </div>
           
           <div class="footer-links-col">
-            <h4 class="footer-heading">VỀ CHÚNG TÔI</h4>
+            <h4 class="footer-heading">${isVi ? "VỀ CHÚNG TÔI" : "关于我们"}</h4>
             <ul class="footer-list">
-              <li><a href="#">Giảng viên</a></li>
-              <li><a href="#">Giới thiệu</a></li>
-              <li><a href="#">Chính sách</a></li>
+              <li><a href="#">${isVi ? "Giảng viên" : "讲师"}</a></li>
+              <li><a href="#">${isVi ? "Giới thiệu" : "介绍"}</a></li>
+              <li><a href="#">${isVi ? "Chính sách" : "政策"}</a></li>
             </ul>
           </div>
           
           <div class="footer-links-col">
-            <h4 class="footer-heading">LIÊN HỆ</h4>
+            <h4 class="footer-heading">${isVi ? "LIÊN HỆ" : "联系"}</h4>
             <ul class="footer-list footer-contact-list">
               <li>
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -1196,14 +1235,14 @@ function renderGlobalFooter() {
               </li>
               <li>
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                <span>Hà Nội, Việt Nam</span>
+                <span>${isVi ? "Hà Nội, Việt Nam" : "河内，越南"}</span>
               </li>
             </ul>
           </div>
         </div>
         
         <div class="footer-bottom">
-          <p>© 2024 Học Tiếng Trung. Tất cả quyền được bảo lưu.</p>
+          <p>© 2024 ${isVi ? "Học Tiếng Trung. Tất cả quyền được bảo lưu." : "学习中文。版权所有。"}</p>
         </div>
     `;
     footerNode.classList.remove("hidden");
@@ -1215,23 +1254,23 @@ function renderGlobalFooter() {
 }
 
 function renderHome() {
+  const isVi = state.lang === "vi";
   screens.home.innerHTML = `
     <section class="redesigned-home">
       <!-- Hero Section -->
       <section class="hero-section">
         <div class="hero-content">
           <h1 class="hero-title">
-            Học tiếng Trung<br>
-            dễ dàng cùng<br>
-            <span class="hero-highlight">lộ trình rõ ràng<span class="highlight-line"></span></span>
+            ${isVi ? "Học tiếng Trung<br>dễ dàng cùng<br>" : "轻松学中文<br>拥有<br>"}
+            <span class="hero-highlight">${isVi ? "lộ trình rõ ràng" : "清晰的学习路线"}<span class="highlight-line"></span></span>
           </h1>
 
-          
           <p class="hero-subtitle">
-            Khóa học bài bản cho người mới bắt đầu đến nâng cao, giúp bạn tự tin giao tiếp, học HSK và ứng dụng trong công việc.
+            ${isVi ? "Khóa học bài bản cho người mới bắt đầu đến nâng cao, giúp bạn tự tin giao tiếp, học HSK và ứng dụng trong công việc." : "为初学者到高级学习者提供的系统课程，帮助您自信地进行交流，学习HSK并应用于工作中。"}
+          </p>
           <div class="hero-buttons">
             <button id="heroStartBtn" class="btn-hero-primary" type="button">
-              Bắt đầu học ngay <span class="arrow-icon">›</span>
+              ${isVi ? "Bắt đầu học ngay" : "立即开始学习"} <span class="arrow-icon">›</span>
             </button>
           </div>
         </div>
@@ -1241,10 +1280,10 @@ function renderHome() {
             <div class="hero-media-glow"></div>
             <img src="assets/hero_illustration.png" class="hero-main-img" alt="Học tiếng Trung" />
             <div class="hero-badge hero-badge-top">HSK 1-5</div>
-            <div class="hero-badge hero-badge-bottom">+1000 bài tập</div>
+            <div class="hero-badge hero-badge-bottom">${isVi ? "+1000 bài tập" : "+1000道练习"}</div>
             <div class="hero-stat-pill">
               <span>4.9</span>
-              <small>Đánh giá</small>
+              <small>${isVi ? "Đánh giá" : "评分"}</small>
             </div>
           </div>
           
@@ -1268,7 +1307,7 @@ function renderHome() {
       <!-- Features Section: Vì sao nên học cùng chúng tôi? -->
       <section class="features-section">
         <h2 class="section-title text-center">
-          Vì sao nên học cùng chúng tôi?
+          ${isVi ? "Vì sao nên học cùng chúng tôi?" : "为什么选择和我们一起学习？"}
         </h2>
         <div class="features-grid">
           <div class="feature-card">
@@ -1278,8 +1317,8 @@ function renderHome() {
                 <circle cx="12" cy="10" r="3" />
               </svg>
             </div>
-            <h3 class="feature-title">Lộ trình rõ ràng</h3>
-            <p class="feature-desc">Lộ trình khóa học theo từng cấp độ, dễ dàng theo dõi và bứt phá.</p>
+            <h3 class="feature-title">${isVi ? "Lộ trình rõ ràng" : "清晰的学习路线"}</h3>
+            <p class="feature-desc">${isVi ? "Lộ trình khóa học theo từng cấp độ, dễ dàng theo dõi và bứt phá." : "按级别排列的课程路线，易于跟踪和突破。"}</p>
           </div>
           
           <div class="feature-card">
@@ -1291,8 +1330,8 @@ function renderHome() {
                 <path d="M16 3.13a4 4 0 0 1 0 7.75" />
               </svg>
             </div>
-            <h3 class="feature-title">Giảng viên tận tâm</h3>
-            <p class="feature-desc">Giảng viên giàu kinh nghiệm, nhiệt tình đồng hành cùng bạn.</p>
+            <h3 class="feature-title">${isVi ? "Giảng viên tận tâm" : "用心的讲师"}</h3>
+            <p class="feature-desc">${isVi ? "Giảng viên giàu kinh nghiệm, nhiệt tình đồng hành cùng bạn." : "经验丰富的讲师，热情地陪伴着您。"}</p>
           </div>
           
           <div class="feature-card">
@@ -1302,8 +1341,8 @@ function renderHome() {
                 <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
               </svg>
             </div>
-            <h3 class="feature-title">Bài học dễ hiểu</h3>
-            <p class="feature-desc">Nội dung tinh gọn, sinh động, dễ hiểu và dễ áp dụng vào thực tế.</p>
+            <h3 class="feature-title">${isVi ? "Bài học dễ hiểu" : "通俗易懂的课程"}</h3>
+            <p class="feature-desc">${isVi ? "Nội dung tinh gọn, sinh động, dễ hiểu và dễ áp dụng vào thực tế." : "内容精简、生动、易懂，且易于应用到实际中。"}</p>
           </div>
           
           <div class="feature-card">
@@ -1313,8 +1352,8 @@ function renderHome() {
                 <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
               </svg>
             </div>
-            <h3 class="feature-title">Hỗ trợ 1:1</h3>
-            <p class="feature-desc">Hỗ trợ riêng từng học viên, giải đáp nhanh chóng, tiến bộ mỗi ngày.</p>
+            <h3 class="feature-title">${isVi ? "Hỗ trợ 1:1" : "1对1支持"}</h3>
+            <p class="feature-desc">${isVi ? "Hỗ trợ riêng từng học viên, giải đáp nhanh chóng, tiến bộ mỗi ngày." : "针对每位学员的专属支持，快速解答，每天都有进步。"}</p>
           </div>
         </div>
       </section>
@@ -1322,16 +1361,16 @@ function renderHome() {
       <!-- Testimonials Section -->
       <section class="testimonials-section">
         <h2 class="section-title text-center">
-          Bạn nghĩ gì về HuaMei với tư cách là một người học ngôn ngữ?
+          ${isVi ? "Bạn nghĩ gì về HuaMei với tư cách là một người học ngôn ngữ?" : "作为语言学习者，您对华美有什么看法？"}
         </h2>
         <div class="testimonials-grid">
           <div class="testimonial-card">
             <div class="testimonial-bg" style="background-image: url('assets/review_user_1.png');"></div>
             <div class="testimonial-overlay">
-              <div class="testimonial-header theme-green-a">Nguyênnhana</div>
+              <div class="testimonial-header theme-green-a">${isVi ? "Nguyênnhana" : "阮雅娜"}</div>
               <div class="testimonial-body">
                 <div class="stars">★★★★★</div>
-                <p>Cuối cùng tôi đã tìm thấy lộ trình học tiếng Trung hiệu quả và có thể giao tiếp tự tin với các đối tác nước ngoài.</p>
+                <p>${isVi ? "Cuối cùng tôi đã tìm thấy lộ trình học tiếng Trung hiệu quả và có thể giao tiếp tự tin với các đối tác nước ngoài." : "我终于找到了高效的中文学习路线，并且能够自信地与国外伙伴进行交流。"}</p>
               </div>
             </div>
           </div>
@@ -1342,7 +1381,7 @@ function renderHome() {
               <div class="testimonial-header theme-green-b">Anh</div>
               <div class="testimonial-body">
                 <div class="stars">★★★★★</div>
-                <p>Cảm giác xem phim Trung Quốc cổ trang mà không cần nhìn phụ đề thật là đã quá đi... Cảm ơn Học Tiếng Trung ♥</p>
+                <p>${isVi ? "Cảm giác xem phim Trung Quốc cổ trang mà không cần nhìn phụ đề thật là đã quá đi... Cảm ơn Học Tiếng Trung ♥" : "看中国古装剧不需要看字幕的感觉真是太爽了... 感谢“学中文”♥"}</p>
               </div>
             </div>
           </div>
@@ -1353,7 +1392,7 @@ function renderHome() {
               <div class="testimonial-header theme-green-c">Dung</div>
               <div class="testimonial-body">
                 <div class="stars">★★★★★</div>
-                <p>Ứng dụng 5*, có thể học nhiều mẫu câu giao tiếp với giá cả hợp lý, học tiện lợi hơn nhiều so với ở trung tâm.</p>
+                <p>${isVi ? "Ứng dụng 5*, có thể học nhiều mẫu câu giao tiếp với giá cả hợp lý, học tiện lợi hơn nhiều so với ở trung tâm." : "5星好评的应用，可以以合理的价格学习很多日常交流句型，比在中心学习方便得多。"}</p>
               </div>
             </div>
           </div>
@@ -1370,6 +1409,7 @@ function renderCourse() {
 }
 
 function renderHskLessonListHTML() {
+  const isVi = state.lang === "vi";
   let filteredLessons = hskLevels[state.level].map((lessonItem, index) => ({ lessonItem, index }));
 
   if (state.hskSearchQuery.trim()) {
@@ -1407,7 +1447,7 @@ function renderHskLessonListHTML() {
         <div class="hsk-lesson-left">
           <div class="hsk-lesson-number">${lessonItem.no}</div>
           <div class="hsk-lesson-info">
-            <h4>Bài ${lessonItem.no}</h4>
+            <h4>${isVi ? `Bài ${lessonItem.no}` : `第 ${lessonItem.no} 课`}</h4>
             <p>${state.lang === "vi" ? (lessonItem.titleVi || lessonItem.title) : (lessonItem.titleZh || lessonItem.title)}</p>
           </div>
         </div>
@@ -1419,19 +1459,20 @@ function renderHskLessonListHTML() {
         </div>
         
         <div class="hsk-lesson-right">
-          <span class="hsk-items-count">${lessonItem.items.length} mục luyện</span>
+          <span class="hsk-items-count">${lessonItem.items.length} ${isVi ? "mục luyện" : "个练习"}</span>
           <button class="hsk-lesson-arrow-btn" type="button" aria-label="Luyện tập">›</button>
         </div>
       </div>
     `;
   }).join("") : `
     <div class="hsk-no-results">
-      Không tìm thấy bài học nào phù hợp.
+      ${isVi ? "Không tìm thấy bài học nào phù hợp." : "未找到符合的课程。"}
     </div>
   `;
 }
 
 function renderHskCourse() {
+  const isVi = state.lang === "vi";
   const totalLessons = hskLevels[state.level].length;
   const completedLessonsInLevel = hskLevels[state.level].filter(l => state.completed.has(l.id)).length;
   const hskProgressPercent = totalLessons > 0 ? Math.round((completedLessonsInLevel / totalLessons) * 100) : 0;
@@ -1444,18 +1485,18 @@ function renderHskCourse() {
         <div class="hsk-sidebar-header">
           <div class="hsk-header-icon">🏆</div>
           <div class="hsk-header-copy">
-            <h2>Khóa HSK</h2>
-            <p>Học theo cấp độ HSK với lộ trình bài bản và hiệu quả.</p>
+            <h2>${t("hskTitle")}</h2>
+            <p>${isVi ? "Học theo cấp độ HSK với lộ trình bài bản và hiệu quả." : "按HSK级别学习，提供系统且高效的路线。"}</p>
           </div>
         </div>
         
         <div class="hsk-search-wrapper">
           <span class="search-icon">🔍</span>
-          <input type="text" id="hskSearchInput" placeholder="Tìm kiếm bài học..." value="${escapeAttr(state.hskSearchQuery)}" />
+          <input type="text" id="hskSearchInput" placeholder="${isVi ? "Tìm kiếm bài học..." : "搜索课程..."}" value="${escapeAttr(state.hskSearchQuery)}" />
         </div>
         
         <div class="hsk-level-section">
-          <h3>Chọn cấp độ</h3>
+          <h3>${isVi ? "Chọn cấp độ" : "选择等级"}</h3>
           <div class="hsk-level-list">
             ${Object.keys(hskLevels).map((level) => {
     const isActive = level === state.level;
@@ -1470,13 +1511,13 @@ function renderHskCourse() {
         </div>
         
         <div class="hsk-stats-section">
-          <h3>Thống kê nhanh</h3>
+          <h3>${isVi ? "Thống kê nhanh" : "快速统计"}</h3>
           <div class="hsk-stats-grid">
             <div class="hsk-stat-card">
               <div class="stat-card-icon icon-lessons">📚</div>
               <div class="stat-card-info">
                 <strong>${totalLessons}</strong>
-                <span>Tổng số bài</span>
+                <span>${isVi ? "Tổng số bài" : "课程总数"}</span>
               </div>
             </div>
             
@@ -1484,7 +1525,7 @@ function renderHskCourse() {
               <div class="stat-card-icon icon-progress">📊</div>
               <div class="stat-card-info">
                 <strong>${hskProgressPercent}%</strong>
-                <span>Tiến độ học</span>
+                <span>${isVi ? "Tiến độ học" : "学习进度"}</span>
               </div>
             </div>
             
@@ -1492,7 +1533,7 @@ function renderHskCourse() {
               <div class="stat-card-icon icon-items">✍️</div>
               <div class="stat-card-info">
                 <strong>${totalItemsInLevel}</strong>
-                <span>Tổng số mục luyện</span>
+                <span>${isVi ? "Tổng số mục luyện" : "练习总数"}</span>
               </div>
             </div>
           </div>
@@ -1514,27 +1555,27 @@ function renderHskCourse() {
             </svg>
           </div>
           <div class="hsk-recom-info">
-            <h2>Lộ trình đề xuất hôm nay</h2>
-            <p>Hoàn thành 2-3 bài học để duy trì thói quen học tập hiệu quả.</p>
+            <h2>${isVi ? "Lộ trình đề xuất hôm nay" : "今日推荐路线"}</h2>
+            <p>${isVi ? "Hoàn thành 2-3 bài học để duy trì thói quen học tập hiệu quả." : "完成2-3课以保持高效的学习习惯。"}</p>
             <div class="hsk-recom-meta">
-              <span>📖 ${completedLessonsInLevel} / ${totalLessons} bài đã học</span>
+              <span>📖 ${completedLessonsInLevel} / ${totalLessons} ${isVi ? "bài đã học" : "已学课程"}</span>
               <span class="meta-divider">|</span>
-              <span>🕒 ~ 20 phút</span>
+              <span>🕒 ~ 20 ${isVi ? "phút" : "分钟"}</span>
             </div>
           </div>
           <button id="hskContinueBtn" class="btn-continue-learn" type="button">
-            <span>▶</span> Tiếp tục học
+            <span>▶</span> ${isVi ? "Tiếp tục học" : "继续学习"}
           </button>
         </div>
         
         <!-- Lesson List Section -->
         <div class="hsk-lessons-header">
-          <h2>Danh sách bài học ${state.level}</h2>
+          <h2>${isVi ? `Danh sách bài học ${state.level}` : `${state.level} 课程列表`}</h2>
           <div class="hsk-lessons-actions">
             <div class="hsk-filter-tabs">
-              <button class="${state.hskFilterTab === "newest" ? "active" : ""}" data-hsk-filter="newest" type="button">Mới nhất</button>
-              <button class="${state.hskFilterTab === "popular" ? "active" : ""}" data-hsk-filter="popular" type="button">Phổ biến</button>
-              <button class="${state.hskFilterTab === "completed" ? "active" : ""}" data-hsk-filter="completed" type="button">Đã học</button>
+              <button class="${state.hskFilterTab === "newest" ? "active" : ""}" data-hsk-filter="newest" type="button">${isVi ? "Mới nhất" : "最新"}</button>
+              <button class="${state.hskFilterTab === "popular" ? "active" : ""}" data-hsk-filter="popular" type="button">${isVi ? "Phổ biến" : "热门"}</button>
+              <button class="${state.hskFilterTab === "completed" ? "active" : ""}" data-hsk-filter="completed" type="button">${isVi ? "Đã học" : "已学"}</button>
             </div>
             <button class="hsk-filter-settings-btn" type="button" aria-label="Bộ lọc">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1562,6 +1603,7 @@ function renderHskCourse() {
 
 function renderDailyThemesListHTML() {
   let filteredThemes = dailyThemes;
+  const isVi = state.lang === "vi";
 
   if (state.dailySearchQuery.trim()) {
     const query = normalizeLatin(state.dailySearchQuery.trim());
@@ -1590,20 +1632,21 @@ function renderDailyThemesListHTML() {
           <h4>${theme.zh}</h4>
           <p>${theme.vi}</p>
           <div class="daily-theme-footer">
-            <span class="daily-theme-count-pill">${theme.items.length} mục luyện</span>
-            <span class="daily-enter-text">Vào học <span class="arrow-right-icon">➔</span></span>
+            <span class="daily-theme-count-pill">${theme.items.length} ${isVi ? "mục luyện" : "个练习"}</span>
+            <span class="daily-enter-text">${isVi ? "Vào học" : "开始学习"} <span class="arrow-right-icon">➔</span></span>
           </div>
         </div>
       </div>
     `;
   }).join("") : `
     <div class="daily-no-results">
-      Không tìm thấy chủ đề nào phù hợp.
+      ${isVi ? "Không tìm thấy chủ đề nào phù hợp." : "未找到符合的主题。"}
     </div>
   `;
 }
 
 function renderDailyCourse() {
+  const isVi = state.lang === "vi";
   const totalThemes = dailyThemes.length;
   const totalItemsInThemes = dailyThemes.reduce((acc, t) => acc + t.items.length, 0);
 
@@ -1635,9 +1678,9 @@ function renderDailyCourse() {
         </div>
 
         <div class="daily-banner-left">
-          <span class="daily-banner-tag">TIẾNG TRUNG THÔNG DỤNG</span>
-          <h1>Chọn chủ đề tiếng Trung thông dụng</h1>
-          <p>Chọn chủ đề phù hợp để bắt đầu luyện tập các đoạn hội thoại thực tế, nâng cao kỹ năng giao tiếp tiếng Trung mỗi ngày.</p>
+          <span class="daily-banner-tag">${isVi ? "TIẾNG TRUNG THÔNG DỤNG" : "常用中文"}</span>
+          <h1>${isVi ? "Chọn chủ đề tiếng Trung thông dụng" : "选择常用中文主题"}</h1>
+          <p>${isVi ? "Chọn chủ đề phù hợp để bắt đầu luyện tập các đoạn hội thoại thực tế, nâng cao kỹ năng giao tiếp tiếng Trung mỗi ngày." : "选择合适的主题开始练习实际对话，每天提高您的中文沟通技巧。"}</p>
           
           <div class="daily-banner-stats">
             <div class="daily-stat-pill">
@@ -1650,7 +1693,7 @@ function renderDailyCourse() {
                 </svg>
               </span>
               <div class="daily-stat-pill-text">
-                <span>Tổng số chủ đề</span>
+                <span>${isVi ? "Tổng số chủ đề" : "主题总数"}</span>
                 <strong>${totalThemes}</strong>
               </div>
             </div>
@@ -1665,7 +1708,7 @@ function renderDailyCourse() {
                 </svg>
               </span>
               <div class="daily-stat-pill-text">
-                <span>Tổng số mục luyện</span>
+                <span>${isVi ? "Tổng số mục luyện" : "练习总数"}</span>
                 <strong>${totalItemsInThemes}</strong>
               </div>
             </div>
@@ -1694,7 +1737,7 @@ function renderDailyCourse() {
             <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
               <path d="M8 5v14l11-7z"/>
             </svg>
-            Bắt đầu học
+            ${isVi ? "Bắt đầu học" : "开始学习"}
           </button>
         </div>
       </div>
@@ -1708,7 +1751,7 @@ function renderDailyCourse() {
               <line x1="21" y1="21" x2="16.65" y2="16.65"/>
             </svg>
           </span>
-          <input type="text" id="dailySearchInput" placeholder="Tìm chủ đề..." value="${escapeAttr(state.dailySearchQuery)}" />
+          <input type="text" id="dailySearchInput" placeholder="${isVi ? "Tìm chủ đề..." : "搜索主题..."}" value="${escapeAttr(state.dailySearchQuery)}" />
         </div>
         
         <div class="daily-filter-tabs">
@@ -1719,32 +1762,32 @@ function renderDailyCourse() {
               <rect x="14" y="14" width="7" height="7"/>
               <rect x="3" y="14" width="7" height="7"/>
             </svg>
-            Tất cả
+            ${isVi ? "Tất cả" : "全部"}
           </button>
           <button class="${state.dailyFilterTab === "pho-bien" ? "active" : ""}" data-daily-filter="pho-bien" type="button">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 3z"/>
             </svg>
-            Phổ biến
+            ${isVi ? "Phổ biến" : "热门"}
           </button>
           <button class="${state.dailyFilterTab === "giao-tiep" ? "active" : ""}" data-daily-filter="giao-tiep" type="button">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
             </svg>
-            Giao tiếp
+            ${isVi ? "Giao tiếp" : "日常沟通"}
           </button>
           <button class="${state.dailyFilterTab === "cong-viec" ? "active" : ""}" data-daily-filter="cong-viec" type="button">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
               <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
             </svg>
-            Công việc
+            ${isVi ? "Công việc" : "职场工作"}
           </button>
           <button class="${state.dailyFilterTab === "du-lich" ? "active" : ""}" data-daily-filter="du-lich" type="button">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 16V8a2 2 0 0 0-1.85-2H18l-5-4H9l3 4H7L5 4H3l2 4H3v2h2l-2 4h2l2-4h5l-3 4h4l5-4h1.15A2 2 0 0 0 21 16z"/>
             </svg>
-            Du lịch
+            ${isVi ? "Du lịch" : "旅游出行"}
           </button>
         </div>
       </div>
@@ -1820,7 +1863,7 @@ function startPractice(options = {}) {
   renderPractice();
   setScreen("practice");
   setTimeout(() => {
-    if (state.mode === "translate") speak();
+    speak();
     focusInput();
   }, 100);
 }
@@ -1839,6 +1882,10 @@ function renderPractice() {
         <button class="${state.mode === "dictation" ? "active" : ""}" data-mode="dictation" type="button">${t("dictation")}</button>
       </div>
     </header>
+          <div class="practice-meta">
+        <strong>${collection.title}</strong>
+        <span>${state.index + 1}/${collection.items.length}</span>
+      </div>
     <section class="practice-layout">
       <section class="exercise-card">
         <span class="stage-pill">${t(stageKey[itemNow.stage])}</span>
@@ -2044,7 +2091,7 @@ function nextItem() {
   state.index += 1;
   resetPractice();
   renderPractice();
-  if (state.mode === "translate") setTimeout(speak, 120);
+  setTimeout(speak, 120);
 }
 
 function showAnswer() {
@@ -2276,7 +2323,7 @@ function bindEvents() {
         role: row.querySelector('[data-field="role"]').value,
         isActive: row.querySelector('[data-field="isActive"]').checked,
       };
-      state.adminStatus = "Đang lưu thay đổi...";
+      state.adminStatus = state.lang === "vi" ? "Đang lưu thay đổi..." : "正在保存更改...";
       renderAdmin();
       apiRequest(`/api/admin/users/${encodeURIComponent(userId)}`, {
         method: "PATCH",
@@ -2295,8 +2342,8 @@ function bindEvents() {
     if (adminDeleteUser) {
       const row = adminDeleteUser.closest("[data-user-id]");
       const email = row.querySelector('[data-field="email"]').value.trim();
-      if (!confirm(`Xóa tài khoản ${email}?`)) return;
-      state.adminStatus = "Đang xóa người dùng...";
+      if (!confirm(state.lang === "vi" ? `Xóa tài khoản ${email}?` : `删除帐户 ${email}?`)) return;
+      state.adminStatus = state.lang === "vi" ? "Đang xóa người dùng..." : "正在删除用户...";
       renderAdmin();
       apiRequest(`/api/admin/users/${encodeURIComponent(row.dataset.userId)}`, {
         method: "DELETE",
