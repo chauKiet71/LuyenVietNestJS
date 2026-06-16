@@ -1,0 +1,32 @@
+# Dependencies and temp tooling
+node_modules/
+.tmp-*/
+.worktrees/
+
+# Local browser/session state
+.chrome-julebu-profile/
+
+# Generated screenshots and media artifacts
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.mp4
+!assets/logo.png
+video-analysis-frames/
+hsk2-pages/
+
+# Logs
+*.log
+
+# Local source materials
+*.pdf
+*.txt
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+
+# Local Netlify folder
+.netlify
+deploy-v1-monday-*/

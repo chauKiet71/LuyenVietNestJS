@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chinese Practice V2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Lexend:wght@500;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main id="app" class="app-shell">
+      <header class="app-top">
+        <div class="app-top-inner">
+          <button id="backBtn" class="icon-btn hidden" type="button" aria-label="Back">‹</button>
+          <div class="brand">
+            <img src="assets/huamei-logo.png" alt="HUAMEI Logo" class="brand-logo" />
+            <div class="brand-copy">
+              <span id="brandSubtitle"></span>
+            </div>
+          </div>
+          <nav class="header-nav" id="headerNav">
+            <button class="nav-item" id="navRoadmapBtn" type="button">Lộ trình</button>
+            <button class="nav-item" id="navHskBtn" type="button">Khóa HSK</button>
+            <button class="nav-item" id="navDailyBtn" type="button">Thông dụng</button>
+            <button class="nav-item hidden" id="navAdminBtn" type="button">Admin</button>
+          </nav>
+          <div class="top-actions">
+            <button id="reviewBtn" class="pill-btn" type="button"></button>
+            <button id="langToggle" class="lang-toggle" type="button">
+              <span class="lang-vi">VI</span>
+              <span class="lang-divider">|</span>
+              <span class="lang-en">EN</span>
+            </button>
+            <button id="loginBtn" class="btn-login" type="button" hidden>Đăng nhập</button>
+            <button id="registerBtn" class="btn-register" type="button" hidden>Đăng ký</button>
+            <button id="menuToggleBtn" class="menu-toggle-btn" type="button" aria-label="Toggle Menu">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div id="mobileMenu" class="mobile-dropdown-menu">
+          <nav class="mobile-nav">
+            <button class="mobile-nav-item" id="mobileRoadmapBtn" type="button">Lộ trình <span class="arrow">›</span></button>
+            <button class="mobile-nav-item" id="mobileHskBtn" type="button">Khóa HSK <span class="arrow">›</span></button>
+            <button class="mobile-nav-item" id="mobileDailyBtn" type="button">Thông dụng <span class="arrow">›</span></button>
+            <button class="mobile-nav-item hidden" id="mobileAdminBtn" type="button">Admin <span class="arrow">›</span></button>
+          </nav>
+          <div class="mobile-actions">
+            <button id="mobileLoginBtn" class="btn-login" type="button" disabled title="Đăng nhập/Đăng ký tạm thời bị vô hiệu hóa">Đăng nhập</button>
+            <button id="mobileRegisterBtn" class="btn-register" type="button" disabled title="Đăng nhập/Đăng ký tạm thời bị vô hiệu hóa">Đăng ký</button>
+          </div>
+        </div>
+      </header>
+
+      <section id="homeScreen" class="screen home-screen"></section>
+      <section id="roadmapScreen" class="screen roadmap-screen hidden"></section>
+      <section id="courseScreen" class="screen course-screen hidden"></section>
+      <section id="practiceScreen" class="screen practice-screen hidden"></section>
+      <section id="completeScreen" class="screen complete-screen hidden"></section>
+      <section id="adminScreen" class="screen admin-screen hidden"></section>
+    </main>
+    <div id="burstLayer" class="burst-layer" aria-hidden="true"></div>
+    <footer id="globalFooter" class="redesigned-footer hidden"></footer>
+    <script src="practice-rules.js"></script>
+    <script src="practice-answer-rules.js"></script>
+    <script src="speech-config.js"></script>
+    <script src="sound-effects.js"></script>
+    <script src="academic-review-agent.js"></script>
+    <script src="lesson-runtime-rules.js"></script>
+    <script src="lesson-hsk2-l1.js"></script>
+    <script src="lesson-hsk2-batch-2-5.js"></script>
+    <script src="lesson-hsk2-batch-6-10.js"></script>
+    <script src="lesson-hsk2-batch-11-15.js"></script>
+    <script src="lesson-hsk3-batch-1-5.js"></script>
+    <script src="lesson-hsk3-batch-6-10.js"></script>
+    <script src="lesson-hsk3-batch-11-15.js"></script>
+    <script src="lesson-hsk3-batch-16-20.js"></script>
+    <script src="lesson-hsk4-batch-1-5.js"></script>
+    <script src="lesson-hsk4-batch-6-10.js"></script>
+    <script src="lesson-hsk4-batch-11-15.js"></script>
+    <script src="lesson-hsk4-batch-16-20.js"></script>
+    <script src="lesson-hsk5-batch-1-6.js"></script>
+    <script src="lesson-hsk5-batch-7-12.js"></script>
+    <script src="lesson-hsk5-batch-13-18.js"></script>
+    <script src="lesson-hsk5-batch-19-24.js"></script>
+    <script src="lesson-hsk5-batch-25-30.js"></script>
+    <script src="lesson-hsk5-batch-31-36.js"></script>
+    <script src="lesson-hsk345-aligned-early.js"></script>
+    <script src="lesson-hsk345-aligned-next.js"></script>
+    <script src="lesson-hsk345-aligned-final.js"></script>
+    <script src="lesson-hsk-remediated.js"></script>
+    <script src="lesson-high-frequency-topics.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
