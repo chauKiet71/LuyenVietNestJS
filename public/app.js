@@ -747,19 +747,19 @@ function renderRoadmap() {
         
         <div class="roadmap-timeline">
           ${dailyRoadmap.map((item, index) => {
-            const id = item.lessonId || item.themeId;
-            const isCompleted = state.completed.has(id);
-            const isCurrentActive = !isCompleted && (index === 0 || state.completed.has(dailyRoadmap[index - 1].lessonId || dailyRoadmap[index - 1].themeId));
-            const isLocked = !isCompleted && !isCurrentActive;
+    const id = item.lessonId || item.themeId;
+    const isCompleted = state.completed.has(id);
+    const isCurrentActive = !isCompleted && (index === 0 || state.completed.has(dailyRoadmap[index - 1].lessonId || dailyRoadmap[index - 1].themeId));
+    const isLocked = !isCompleted && !isCurrentActive;
 
-            let statusClass = "locked";
-            if (isCompleted) statusClass = "done";
-            else if (isCurrentActive) statusClass = "active";
+    let statusClass = "locked";
+    if (isCompleted) statusClass = "done";
+    else if (isCurrentActive) statusClass = "active";
 
-            const totalItems = getLessonTotalItems(item);
-            const progressText = isCompleted ? `${totalItems}/${totalItems}` : `0/${totalItems}`;
+    const totalItems = getLessonTotalItems(item);
+    const progressText = isCompleted ? `${totalItems}/${totalItems}` : `0/${totalItems}`;
 
-            return `
+    return `
               <div class="roadmap-timeline-item status-${statusClass}">
                 <div class="timeline-node-col">
                   <button class="roadmap-node-circle" type="button" data-roadmap-day="${item.day}" data-lesson-id="${item.lessonId || ''}" data-theme-id="${item.themeId || ''}" ${isLocked ? "disabled" : ""}>
@@ -793,7 +793,7 @@ function renderRoadmap() {
                 </div>
               </div>
             `;
-          }).join("")}
+  }).join("")}
         </div>
       </div>
       
@@ -853,10 +853,6 @@ function renderRoadmap() {
           <button class="btn-sidebar-register" id="sidebarRegisterBtn" type="button" disabled title="Đăng nhập/Đăng ký tạm thời bị vô hiệu hóa">Đăng ký</button>
         </div>
         
-        <!-- Bottom illustration -->
-        <div class="sidebar-deco-bottom">
-          <img src="assets/benefit_resources.png" alt="Resources" />
-        </div>
       </aside>
     </div>
   `;
@@ -1836,10 +1832,7 @@ function renderPractice() {
   screens.practice.innerHTML = `
     <header class="practice-top">
       <button id="practiceCloseBtn" class="practice-close-btn" type="button" aria-label="Close">&times;</button>  
-      <div class="practice-meta">
-        <strong>${collection.title}</strong>
-        <span>${state.index + 1}/${collection.items.length}</span>
-      </div>
+
       <div class="thin-progress"><span style="width:${((state.index + 1) / collection.items.length) * 100}%"></span></div>
       <div class="mode-switch" aria-label="${t("modeLabel")}">
         <button class="${state.mode === "translate" ? "active" : ""}" data-mode="translate" type="button">${t("translate")}</button>
