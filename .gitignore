@@ -13,6 +13,11 @@ node_modules/
 *.webp
 *.mp4
 !assets/logo.png
+!public/assets/*.png
+!public/assets/*.jpg
+!public/assets/*.jpeg
+!public/assets/*.webp
+!public/assets/*.svg
 video-analysis-frames/
 hsk2-pages/
 
