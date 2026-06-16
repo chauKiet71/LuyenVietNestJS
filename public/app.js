@@ -58,6 +58,7 @@ const i18n = {
     logout: "Đăng xuất",
     account: "Tài khoản",
     admin: "Admin",
+    vocab: "Bộ từ",
   },
   zh: {
     brandSubtitle: "给越南学生使用的中文练习",
@@ -115,6 +116,7 @@ const i18n = {
     logout: "退出登录",
     account: "我的账户",
     admin: "管理员",
+    vocab: "生词本",
   },
 };
 
@@ -360,6 +362,7 @@ const state = {
   hskFilterTab: "newest",
   dailySearchQuery: "",
   dailyFilterTab: "all",
+  vocabSearchQuery: "",
   user: JSON.parse(localStorage.getItem("v2-user") || "null"),
   adminKey: localStorage.getItem("v2-admin-key") || "",
   adminUsers: [],
@@ -374,6 +377,7 @@ const screens = {
   practice: $("#practiceScreen"),
   complete: $("#completeScreen"),
   admin: $("#adminScreen"),
+  vocab: $("#vocabScreen"),
 };
 const t = (key) => i18n[state.lang][key] || i18n.vi[key] || key;
 const shouldShowTeacherPreview = (currentState) =>
@@ -465,6 +469,15 @@ let slowSpeech = false;
 let preferredChineseVoice = null;
 
 function currentCollection() {
+  if (state.module === "vocab") {
+    const items = [...state.saved].map(hanzi => findItemByHanzi(hanzi));
+    return {
+      id: "vocab",
+      no: "",
+      title: state.lang === "vi" ? "Bộ từ luyện tập" : "生词本练习",
+      items: items.length > 0 ? items : [{ hanzi: "", words: [], vi: "", stage: "word" }]
+    };
+  }
   if (state.module === "hsk") {
     const lessonItem = hskLevels[state.level].find((entry) => entry.id === state.lessonId);
     if (!lessonItem) return null;
@@ -596,6 +609,32 @@ function isMatch(input, expectedPinyin, expectedHanzi) {
   );
 }
 
+function showToast(message) {
+  let container = document.getElementById("toastContainer");
+  if (!container) {
+    container = document.createElement("div");
+    container.id = "toastContainer";
+    document.body.appendChild(container);
+  }
+  const toast = document.createElement("div");
+  toast.className = "toast-message";
+  toast.innerHTML = `
+    <span class="toast-icon">★</span>
+    <span class="toast-text">${escapeAttr(message)}</span>
+  `;
+  container.appendChild(toast);
+  requestAnimationFrame(() => {
+    toast.classList.add("show");
+  });
+  setTimeout(() => {
+    toast.classList.remove("show");
+    toast.classList.add("hide");
+    toast.addEventListener("transitionend", () => {
+      toast.remove();
+    });
+  }, 2200);
+}
+
 function saveState() {
   localStorage.setItem("v2-lang", state.lang);
   localStorage.setItem("v2-wrong", JSON.stringify([...state.wrong]));
@@ -614,7 +653,7 @@ function isAdminUser() {
 function setScreen(name) {
   state.screen = name;
   Object.entries(screens).forEach(([key, node]) => node.classList.toggle("hidden", key !== name));
-  $("#backBtn").classList.toggle("hidden", name === "home" || name === "roadmap" || name === "course" || name === "admin");
+  $("#backBtn").classList.toggle("hidden", name === "home" || name === "roadmap" || name === "course" || name === "admin" || name === "vocab");
 
   // Render the global footer outside the screen boundaries
   renderGlobalFooter();
@@ -628,22 +667,26 @@ function setScreen(name) {
   const navRoadmap = $("#navRoadmapBtn");
   const navHsk = $("#navHskBtn");
   const navDaily = $("#navDailyBtn");
+  const navVocab = $("#navVocabBtn");
   const navAdmin = $("#navAdminBtn");
   const mNavRoadmap = $("#mobileRoadmapBtn");
   const mNavHsk = $("#mobileHskBtn");
   const mNavDaily = $("#mobileDailyBtn");
+  const mNavVocab = $("#mobileVocabBtn");
   const mNavAdmin = $("#mobileAdminBtn");
 
-  if (navRoadmap && navHsk && navDaily && navAdmin) {
+  if (navRoadmap && navHsk && navDaily && navVocab && navAdmin) {
     navRoadmap.classList.toggle("active", name === "roadmap");
     navHsk.classList.toggle("active", name === "course" && state.module === "hsk");
     navDaily.classList.toggle("active", name === "course" && state.module === "daily");
+    navVocab.classList.toggle("active", name === "vocab");
     navAdmin.classList.toggle("active", name === "admin");
   }
-  if (mNavRoadmap && mNavHsk && mNavDaily && mNavAdmin) {
+  if (mNavRoadmap && mNavHsk && mNavDaily && mNavVocab && mNavAdmin) {
     mNavRoadmap.classList.toggle("active", name === "roadmap");
     mNavHsk.classList.toggle("active", name === "course" && state.module === "hsk");
     mNavDaily.classList.toggle("active", name === "course" && state.module === "daily");
+    mNavVocab.classList.toggle("active", name === "vocab");
     mNavAdmin.classList.toggle("active", name === "admin");
   }
 }
@@ -664,17 +707,21 @@ function renderChrome() {
   const navRoadmapBtn = $("#navRoadmapBtn");
   const navHskBtn = $("#navHskBtn");
   const navDailyBtn = $("#navDailyBtn");
+  const navVocabBtn = $("#navVocabBtn");
   const mobileRoadmapBtn = $("#mobileRoadmapBtn");
   const mobileHskBtn = $("#mobileHskBtn");
   const mobileDailyBtn = $("#mobileDailyBtn");
+  const mobileVocabBtn = $("#mobileVocabBtn");
 
   if (navRoadmapBtn) navRoadmapBtn.textContent = t("path");
   if (navHskBtn) navHskBtn.textContent = t("hskTitle");
   if (navDailyBtn) navDailyBtn.textContent = t("dailyTitle");
+  if (navVocabBtn) navVocabBtn.textContent = t("vocab");
 
   if (mobileRoadmapBtn) mobileRoadmapBtn.innerHTML = `${t("path")} <span class="arrow">›</span>`;
   if (mobileHskBtn) mobileHskBtn.innerHTML = `${t("hskTitle")} <span class="arrow">›</span>`;
   if (mobileDailyBtn) mobileDailyBtn.innerHTML = `${t("dailyTitle")} <span class="arrow">›</span>`;
+  if (mobileVocabBtn) mobileVocabBtn.innerHTML = `${t("vocab")} <span class="arrow">›</span>`;
 
   const canViewAdmin = isAdminUser();
   if (navAdmin) {
@@ -1833,6 +1880,165 @@ function renderDailyCourse() {
   `;
 }
 
+function speakText(text) {
+  const config = globalThis.speechConfig?.getSpeechPlaybackConfig
+    ? globalThis.speechConfig.getSpeechPlaybackConfig({ slow: false, stage: "word" })
+    : { lang: "zh-CN", rate: 0.98, pitch: 1 };
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = config.lang;
+  utterance.voice = preferredChineseVoice || chooseChineseVoice();
+  utterance.rate = config.rate;
+  utterance.pitch = config.pitch;
+  window.speechSynthesis?.cancel();
+  window.speechSynthesis?.speak(utterance);
+}
+
+function findItemByHanzi(hanzi) {
+  for (const level of Object.values(hskLevels)) {
+    for (const lesson of level) {
+      const found = lesson.items.find(item => item.hanzi === hanzi);
+      if (found) return found;
+    }
+  }
+  for (const theme of dailyThemes) {
+    const found = theme.items.find(item => item.hanzi === hanzi);
+    if (found) return found;
+  }
+  for (const level of Object.values(hskLevels)) {
+    for (const lesson of level) {
+      for (const item of lesson.items) {
+        const foundWord = item.words.find(w => w.text === hanzi);
+        if (foundWord) {
+          return {
+            hanzi: foundWord.text,
+            pinyin: foundWord.pinyin,
+            tone: foundWord.tone,
+            vi: foundWord.vi,
+            stage: "word"
+          };
+        }
+      }
+    }
+  }
+  return {
+    hanzi: hanzi,
+    pinyin: "",
+    tone: "",
+    vi: "Từ đã lưu",
+    stage: "word"
+  };
+}
+
+function renderVocabListHTML() {
+  const isVi = state.lang === "vi";
+  let savedList = Array.from(state.saved).map(hanzi => {
+    const detail = findItemByHanzi(hanzi);
+    return { hanzi, ...detail };
+  });
+
+  const query = (state.vocabSearchQuery || "").trim().toLowerCase();
+  if (query) {
+    const normQuery = normalizeLatin(query);
+    savedList = savedList.filter(item => 
+      item.hanzi.toLowerCase().includes(query) ||
+      normalizeLatin(item.vi).includes(normQuery) ||
+      normalizeLatin(item.pinyin).includes(normQuery)
+    );
+  }
+
+  if (savedList.length === 0) {
+    return `
+      <div class="vocab-empty-state">
+        ${isVi ? "Chưa có từ nào trong bộ từ hoặc không tìm thấy kết quả phù hợp." : "生词本为空或未找到匹配结果。"}
+      </div>
+    `;
+  }
+
+  return savedList.map(item => {
+    let stageLabel = "";
+    if (item.stage === "word") stageLabel = isVi ? "Từ mới" : "生词";
+    else if (item.stage === "phrase") stageLabel = isVi ? "Cụm từ" : "短语";
+    else if (item.stage === "sentence") stageLabel = isVi ? "Câu" : "句子";
+    else if (item.stage === "mixed") stageLabel = isVi ? "Ôn tập" : "复习";
+
+    return `
+      <div class="vocab-item-card" data-vocab-hanzi="${escapeAttr(item.hanzi)}">
+        <div class="vocab-item-main">
+          <div class="vocab-item-header">
+            <span class="vocab-stage-badge stage-${item.stage || 'word'}">${stageLabel}</span>
+            <button class="vocab-delete-btn" type="button" aria-label="Xóa">✕</button>
+          </div>
+          <h3 class="vocab-hanzi">${item.hanzi}</h3>
+          <p class="vocab-pinyin">${item.tone || item.pinyin || ""}</p>
+          <p class="vocab-translation">${item.vi}</p>
+        </div>
+        <div class="vocab-item-actions">
+          <button class="vocab-speak-btn" type="button">
+            🔊 ${isVi ? "Phát âm" : "朗读"}
+          </button>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+function renderVocab() {
+  const isVi = state.lang === "vi";
+  const savedList = Array.from(state.saved);
+  const totalSaved = savedList.length;
+
+  screens.vocab.innerHTML = `
+    <div class="vocab-layout">
+      <!-- Top Banner section -->
+      <div class="vocab-banner-card">
+        <div class="vocab-banner-decor-left">
+          <svg viewBox="0 0 100 100" fill="none" stroke="rgba(16,185,129,0.12)" stroke-width="1.5">
+            <circle cx="50" cy="50" r="40" stroke-dasharray="5,5"/>
+          </svg>
+        </div>
+        <div class="vocab-banner-decor-right">
+          <svg viewBox="0 0 100 120" fill="none" stroke="rgba(16,185,129,0.08)" stroke-width="1.2">
+            <g transform="translate(45, 20) scale(0.65)" fill="none" stroke="rgba(16,185,129,0.06)">
+              <circle cx="23" cy="50" r="20" />
+            </g>
+          </svg>
+        </div>
+
+        <div class="vocab-banner-left">
+          <span class="vocab-banner-tag">${isVi ? "TỪ VỰNG CỦA BẠN" : "我的词汇"}</span>
+          <h1>${isVi ? "Bộ từ đã lưu" : "我的生词本"}</h1>
+          <p>${isVi ? "Ôn tập và nghe lại các từ, cụm từ, câu bạn đã lưu trong quá trình luyện tập." : "复习和重新聆听您在练习过程中保存的生词、短语和句子。"}</p>
+          
+          <div class="vocab-banner-stats">
+            <div class="vocab-stat-pill">
+              <span class="stat-pill-icon color-grid">
+                📚
+              </span>
+              <div class="vocab-stat-pill-text">
+                <span>${isVi ? "Tổng số từ" : "单词总数"}</span>
+                <strong>${totalSaved}</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search row -->
+      <div class="vocab-filter-row">
+        <div class="vocab-search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="vocabSearchInput" placeholder="${isVi ? "Tìm kiếm trong bộ từ..." : "搜索生词本..."}" value="${escapeAttr(state.vocabSearchQuery || "")}" />
+        </div>
+      </div>
+
+      <!-- Words List Grid -->
+      <div class="vocab-grid">
+        ${renderVocabListHTML()}
+      </div>
+    </div>
+  `;
+}
+
 function resetPractice() {
   const itemNow = currentItem();
   const promptVariant = state.mode === "dictation" ? "dictation" : getPromptSizeVariant(itemNow.vi);
@@ -1856,8 +2062,11 @@ function startPractice(options = {}) {
     state.module = "daily";
     state.themeId = options.themeId;
   }
+  if (options.module === "vocab") {
+    state.module = "vocab";
+  }
   state.mode = options.mode || "translate";
-  state.index = 0;
+  state.index = options.index || 0;
   state.score = 0;
   resetPractice();
   renderPractice();
@@ -1930,7 +2139,7 @@ function renderPractice() {
     <footer class="function-dock">
       <button id="playBtn" type="button"><span>▶</span>${t("play")}</button>
       <button id="slowBtn" type="button"><span>◷</span>${t("slow")}</button>
-      <button id="saveBtn" type="button"><span>★</span>${t("favorite")}</button>
+      <button id="saveBtn" class="${state.saved.has(itemNow.hanzi) ? "saved" : ""}" type="button"><span>★</span>${state.saved.has(itemNow.hanzi) ? (state.lang === "vi" ? "Đã lưu" : "已收藏") : t("favorite")}</button>
       <button id="answerBtn" type="button"><span>?</span>${t("showAnswer")}</button>
       <button id="nextBtn" class="primary" type="button"><span>↵</span>${t("next")}</button>
     </footer>
@@ -2101,6 +2310,7 @@ function showAnswer() {
 
 function renderComplete() {
   const collection = currentCollection();
+  const isVocab = state.module === "vocab";
   screens.complete.innerHTML = `
     <section class="complete-card">
       <span class="trophy">✓</span>
@@ -2112,8 +2322,8 @@ function renderComplete() {
         <span><strong>${state.wrong.size}</strong>${t("wrong")}</span>
       </div>
       <div class="complete-actions">
-        <button class="secondary" data-complete="home" type="button">${t("backHome")}</button>
-        <button class="primary" data-complete="next" type="button">${t("nextLesson")}</button>
+        <button class="secondary" data-complete="home" type="button">${isVocab ? (state.lang === "vi" ? "Về bộ từ" : "返回生词本") : t("backHome")}</button>
+        ${isVocab ? "" : `<button class="primary" data-complete="next" type="button">${t("nextLesson")}</button>`}
       </div>
     </section>
   `;
@@ -2242,6 +2452,14 @@ function bindEvents() {
       $("#mobileMenu")?.classList.remove("active");
       return;
     }
+    const mobileVocabBtn = event.target.closest("#mobileVocabBtn");
+    if (mobileVocabBtn) {
+      state.fromRoadmap = false;
+      renderVocab();
+      setScreen("vocab");
+      $("#mobileMenu")?.classList.remove("active");
+      return;
+    }
     const mobileAdminBtn = event.target.closest("#mobileAdminBtn");
     if (mobileAdminBtn) {
       if (!isAdminUser()) return;
@@ -2294,6 +2512,13 @@ function bindEvents() {
       state.module = "daily";
       renderCourse();
       setScreen("course");
+      return;
+    }
+    const navVocabBtn = event.target.closest("#navVocabBtn");
+    if (navVocabBtn) {
+      state.fromRoadmap = false;
+      renderVocab();
+      setScreen("vocab");
       return;
     }
     const navAdminBtn = event.target.closest("#navAdminBtn");
@@ -2456,14 +2681,29 @@ function bindEvents() {
     if (event.target.closest("#answerBtn")) showAnswer();
     if (event.target.closest("#nextBtn")) nextItem();
     if (event.target.closest("#saveBtn")) {
-      state.saved.add(currentItem().hanzi);
+      const hanzi = currentItem().hanzi;
+      const btn = event.target.closest("#saveBtn");
+      if (state.saved.has(hanzi)) {
+        state.saved.delete(hanzi);
+        btn.classList.remove("saved");
+        btn.innerHTML = `<span>★</span>${t("favorite")}`;
+        showToast(state.lang === "vi" ? "Đã hủy lưu từ vựng" : "已取消收藏生词");
+      } else {
+        state.saved.add(hanzi);
+        btn.classList.add("saved");
+        btn.innerHTML = `<span>★</span>${state.lang === "vi" ? "Đã lưu" : "已收藏"}`;
+        playTone("correct");
+        showToast(state.lang === "vi" ? "Đã lưu từ vựng thành công" : "生词收藏成功");
+      }
       saveState();
-      playTone("correct");
     }
     const completeBtn = event.target.closest("[data-complete]");
     if (completeBtn) {
       if (completeBtn.dataset.complete === "home") {
-        if (state.fromRoadmap) {
+        if (state.module === "vocab") {
+          renderVocab();
+          setScreen("vocab");
+        } else if (state.fromRoadmap) {
           renderRoadmap();
           setScreen("roadmap");
         } else {
@@ -2527,6 +2767,41 @@ function bindEvents() {
       }
       return;
     }
+
+    const vocabDeleteBtn = event.target.closest(".vocab-delete-btn");
+    if (vocabDeleteBtn) {
+      const card = vocabDeleteBtn.closest("[data-vocab-hanzi]");
+      if (card) {
+        const hanzi = card.dataset.vocabHanzi;
+        state.saved.delete(hanzi);
+        saveState();
+        renderVocab();
+        showToast(state.lang === "vi" ? "Đã xóa khỏi bộ từ" : "已从生词本删除");
+      }
+      return;
+    }
+
+    const vocabSpeakBtn = event.target.closest(".vocab-speak-btn");
+    if (vocabSpeakBtn) {
+      const card = vocabSpeakBtn.closest("[data-vocab-hanzi]");
+      if (card) {
+        const hanzi = card.dataset.vocabHanzi;
+        speakText(hanzi);
+      }
+      return;
+    }
+
+    const vocabCard = event.target.closest(".vocab-item-card");
+    if (vocabCard && !vocabDeleteBtn && !vocabSpeakBtn) {
+      const hanzi = vocabCard.dataset.vocabHanzi;
+      const items = [...state.saved].map(h => findItemByHanzi(h));
+      const index = items.findIndex(item => item.hanzi === hanzi);
+      if (index !== -1) {
+        state.fromRoadmap = false;
+        startPractice({ module: "vocab", index: index, mode: state.mode || "translate" });
+      }
+      return;
+    }
   });
   $("#app").addEventListener("keydown", (event) => {
     if (event.target.id === "answerInput") {
@@ -2563,6 +2838,13 @@ function bindEvents() {
         gridContainer.innerHTML = renderDailyThemesListHTML();
       }
     }
+    if (event.target.id === "vocabSearchInput") {
+      state.vocabSearchQuery = event.target.value;
+      const gridContainer = $(".vocab-grid");
+      if (gridContainer) {
+        gridContainer.innerHTML = renderVocabListHTML();
+      }
+    }
   });
   document.addEventListener("keydown", (event) => {
     if (event.target?.id === "answerInput") return;
@@ -2581,6 +2863,7 @@ function renderAll() {
   if (state.screen === "practice") renderPractice();
   if (state.screen === "complete") renderComplete();
   if (state.screen === "admin") renderAdmin();
+  if (state.screen === "vocab") renderVocab();
 }
 
 function init() {
