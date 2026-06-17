@@ -2712,7 +2712,7 @@ text-align: center;
   position: sticky;
   bottom: 12px;
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 10px;
   margin-top: 14px;
   border: 1px solid rgba(211, 227, 235, 0.96);
@@ -2750,17 +2750,22 @@ text-align: center;
     background 140ms ease;
 }
 
-.function-dock button:not(.primary):nth-child(1) {
+.function-dock #prevBtn {
+  background: linear-gradient(180deg, rgba(245, 247, 250, 0.98), rgba(235, 240, 245, 0.95));
+  border-color: rgba(200, 212, 224, 0.98);
+}
+
+.function-dock #playBtn {
   background: linear-gradient(180deg, rgba(240, 248, 255, 0.98), rgba(228, 241, 255, 0.95));
   border-color: rgba(183, 211, 236, 0.98);
 }
 
-.function-dock button:not(.primary):nth-child(2) {
+.function-dock #slowBtn {
   background: linear-gradient(180deg, rgba(242, 255, 248, 0.98), rgba(226, 246, 235, 0.95));
   border-color: rgba(186, 225, 202, 0.98);
 }
 
-.function-dock button:not(.primary):nth-child(3) {
+.function-dock #saveBtn {
   background: linear-gradient(180deg, rgba(255, 247, 232, 0.98), rgba(255, 237, 205, 0.95));
   border-color: rgba(239, 208, 157, 0.98);
 }
@@ -2777,9 +2782,16 @@ text-align: center;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
-.function-dock button:not(.primary):nth-child(4) {
+.function-dock #answerBtn {
   background: linear-gradient(180deg, rgba(247, 243, 255, 0.98), rgba(236, 228, 255, 0.95));
   border-color: rgba(203, 187, 241, 0.98);
+}
+
+.function-dock button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
 }
 
 .function-dock button:hover,
@@ -3496,10 +3508,7 @@ p {
 
 .function-dock button,
 .complete-actions button,
-.function-dock button:not(.primary):nth-child(1),
-.function-dock button:not(.primary):nth-child(2),
-.function-dock button:not(.primary):nth-child(3),
-.function-dock button:not(.primary):nth-child(4) {
+.function-dock button:not(.primary) {
   border: 1px solid rgba(211, 224, 236, 0.95);
   border-bottom-width: 3px;
   background: #fff;
@@ -4287,10 +4296,7 @@ p {
 
 .function-dock button,
 .complete-actions button,
-.function-dock button:not(.primary):nth-child(1),
-.function-dock button:not(.primary):nth-child(2),
-.function-dock button:not(.primary):nth-child(3),
-.function-dock button:not(.primary):nth-child(4) {
+.function-dock button:not(.primary) {
   min-height: 46px;
   border-bottom-width: 2px;
   border-radius: 14px;

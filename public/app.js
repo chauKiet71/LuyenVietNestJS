@@ -31,6 +31,7 @@ const i18n = {
     stagePhrase: "Cụm từ",
     stageSentence: "Câu",
     stageMixed: "Ôn tập",
+    prev: "Trước",
     play: "Nghe",
     slow: "Nghe chậm",
     showAnswer: "Đáp án",
@@ -89,6 +90,7 @@ const i18n = {
     stagePhrase: "短语",
     stageSentence: "句子",
     stageMixed: "混合复习",
+    prev: "上一题",
     play: "播放",
     slow: "慢速",
     showAnswer: "答案",
@@ -372,7 +374,6 @@ const state = {
 const $ = (selector) => document.querySelector(selector);
 const screens = {
   home: $("#homeScreen"),
-  roadmap: $("#roadmapScreen"),
   course: $("#courseScreen"),
   practice: $("#practiceScreen"),
   complete: $("#completeScreen"),
@@ -653,7 +654,7 @@ function isAdminUser() {
 function setScreen(name) {
   state.screen = name;
   Object.entries(screens).forEach(([key, node]) => node.classList.toggle("hidden", key !== name));
-  $("#backBtn").classList.toggle("hidden", name === "home" || name === "roadmap" || name === "course" || name === "admin" || name === "vocab");
+  $("#backBtn").classList.toggle("hidden", name === "home" || name === "course" || name === "admin" || name === "vocab");
 
   // Render the global footer outside the screen boundaries
   renderGlobalFooter();
@@ -664,26 +665,22 @@ function setScreen(name) {
   }
 
   // Highlight active middle navigation items
-  const navRoadmap = $("#navRoadmapBtn");
   const navHsk = $("#navHskBtn");
   const navDaily = $("#navDailyBtn");
   const navVocab = $("#navVocabBtn");
   const navAdmin = $("#navAdminBtn");
-  const mNavRoadmap = $("#mobileRoadmapBtn");
   const mNavHsk = $("#mobileHskBtn");
   const mNavDaily = $("#mobileDailyBtn");
   const mNavVocab = $("#mobileVocabBtn");
   const mNavAdmin = $("#mobileAdminBtn");
 
-  if (navRoadmap && navHsk && navDaily && navVocab && navAdmin) {
-    navRoadmap.classList.toggle("active", name === "roadmap");
+  if (navHsk && navDaily && navVocab && navAdmin) {
     navHsk.classList.toggle("active", name === "course" && state.module === "hsk");
     navDaily.classList.toggle("active", name === "course" && state.module === "daily");
     navVocab.classList.toggle("active", name === "vocab");
     navAdmin.classList.toggle("active", name === "admin");
   }
-  if (mNavRoadmap && mNavHsk && mNavDaily && mNavVocab && mNavAdmin) {
-    mNavRoadmap.classList.toggle("active", name === "roadmap");
+  if (mNavHsk && mNavDaily && mNavVocab && mNavAdmin) {
     mNavHsk.classList.toggle("active", name === "course" && state.module === "hsk");
     mNavDaily.classList.toggle("active", name === "course" && state.module === "daily");
     mNavVocab.classList.toggle("active", name === "vocab");
@@ -704,21 +701,17 @@ function renderChrome() {
   const sidebarLoginBtn = $("#sidebarLoginBtn");
   const sidebarRegisterBtn = $("#sidebarRegisterBtn");
 
-  const navRoadmapBtn = $("#navRoadmapBtn");
   const navHskBtn = $("#navHskBtn");
   const navDailyBtn = $("#navDailyBtn");
   const navVocabBtn = $("#navVocabBtn");
-  const mobileRoadmapBtn = $("#mobileRoadmapBtn");
   const mobileHskBtn = $("#mobileHskBtn");
   const mobileDailyBtn = $("#mobileDailyBtn");
   const mobileVocabBtn = $("#mobileVocabBtn");
 
-  if (navRoadmapBtn) navRoadmapBtn.textContent = t("path");
   if (navHskBtn) navHskBtn.textContent = t("hskTitle");
   if (navDailyBtn) navDailyBtn.textContent = t("dailyTitle");
   if (navVocabBtn) navVocabBtn.textContent = t("vocab");
 
-  if (mobileRoadmapBtn) mobileRoadmapBtn.innerHTML = `${t("path")} <span class="arrow">›</span>`;
   if (mobileHskBtn) mobileHskBtn.innerHTML = `${t("hskTitle")} <span class="arrow">›</span>`;
   if (mobileDailyBtn) mobileDailyBtn.innerHTML = `${t("dailyTitle")} <span class="arrow">›</span>`;
   if (mobileVocabBtn) mobileVocabBtn.innerHTML = `${t("vocab")} <span class="arrow">›</span>`;
@@ -808,6 +801,12 @@ const dailyRoadmap = [
 ];
 
 function renderRoadmap() {
+  if (!screens.roadmap) {
+    state.module = "hsk";
+    renderCourse();
+    setScreen("course");
+    return;
+  }
   const isVi = state.lang === "vi";
   const completedDaysCount = dailyRoadmap.filter(d => {
     const id = d.lessonId || d.themeId;
@@ -1210,13 +1209,8 @@ function showQuitModal() {
 
   document.getElementById("btnQuitLearning").onclick = () => {
     closeModal();
-    if (state.fromRoadmap) {
-      renderRoadmap();
-      setScreen("roadmap");
-    } else {
-      renderCourse();
-      setScreen("course");
-    }
+    renderCourse();
+    setScreen("course");
   };
 }
 
@@ -2137,6 +2131,7 @@ function renderPractice() {
       </aside>
     </section>
     <footer class="function-dock">
+      <button id="prevBtn" type="button" ${state.index === 0 ? "disabled" : ""}><span>◀</span>${t("prev")}</button>
       <button id="playBtn" type="button"><span>▶</span>${t("play")}</button>
       <button id="slowBtn" type="button"><span>◷</span>${t("slow")}</button>
       <button id="saveBtn" class="${state.saved.has(itemNow.hanzi) ? "saved" : ""}" type="button"><span>★</span>${state.saved.has(itemNow.hanzi) ? (state.lang === "vi" ? "Đã lưu" : "已收藏") : t("favorite")}</button>
@@ -2287,6 +2282,15 @@ function finishItem(options = {}) {
   }
 }
 
+function prevItem() {
+  if (state.index <= 0) return;
+  $("#burstLayer").innerHTML = "";
+  state.index -= 1;
+  resetPractice();
+  renderPractice();
+  setTimeout(speak, 120);
+}
+
 function nextItem() {
   const collection = currentCollection();
   $("#burstLayer").innerHTML = "";
@@ -2413,27 +2417,14 @@ function bindEvents() {
   }
   $("#backBtn").addEventListener("click", () => {
     if (state.screen === "practice" || state.screen === "complete") {
-      if (state.fromRoadmap) {
-        renderRoadmap();
-        setScreen("roadmap");
-      } else {
-        renderCourse();
-        setScreen("course");
-      }
+      renderCourse();
+      setScreen("course");
     } else if (state.screen === "course") {
       setScreen("home");
     }
   });
   $("#app").addEventListener("click", (event) => {
     // Mobile menu handlers
-    const mobileRoadmapBtn = event.target.closest("#mobileRoadmapBtn");
-    if (mobileRoadmapBtn) {
-      state.fromRoadmap = false;
-      renderRoadmap();
-      setScreen("roadmap");
-      $("#mobileMenu")?.classList.remove("active");
-      return;
-    }
     const mobileHskBtn = event.target.closest("#mobileHskBtn");
     if (mobileHskBtn) {
       state.fromRoadmap = false;
@@ -2491,13 +2482,6 @@ function bindEvents() {
     }
 
     // Middle Nav Items Click Handlers
-    const navRoadmapBtn = event.target.closest("#navRoadmapBtn");
-    if (navRoadmapBtn) {
-      state.fromRoadmap = false;
-      renderRoadmap();
-      setScreen("roadmap");
-      return;
-    }
     const navHskBtn = event.target.closest("#navHskBtn");
     if (navHskBtn) {
       state.fromRoadmap = false;
@@ -2583,9 +2567,9 @@ function bindEvents() {
     }
 
     if (event.target.closest("#heroStartBtn") || event.target.closest("#heroCourseBtn")) {
-      state.fromRoadmap = false;
-      renderRoadmap();
-      setScreen("roadmap");
+      state.module = "hsk";
+      renderCourse();
+      setScreen("course");
       return;
     }
 
@@ -2673,6 +2657,7 @@ function bindEvents() {
       if (state.mode === "dictation") speak();
       return;
     }
+    if (event.target.closest("#prevBtn")) prevItem();
     if (event.target.closest("#playBtn")) speak();
     if (event.target.closest("#slowBtn")) {
       slowSpeech = true;
@@ -2858,7 +2843,6 @@ function bindEvents() {
 function renderAll() {
   renderChrome();
   renderHome();
-  if (state.screen === "roadmap") renderRoadmap();
   if (state.screen === "course") renderCourse();
   if (state.screen === "practice") renderPractice();
   if (state.screen === "complete") renderComplete();
