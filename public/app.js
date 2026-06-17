@@ -1933,7 +1933,7 @@ function renderVocabListHTML() {
   const query = (state.vocabSearchQuery || "").trim().toLowerCase();
   if (query) {
     const normQuery = normalizeLatin(query);
-    savedList = savedList.filter(item => 
+    savedList = savedList.filter(item =>
       item.hanzi.toLowerCase().includes(query) ||
       normalizeLatin(item.vi).includes(normQuery) ||
       normalizeLatin(item.pinyin).includes(normQuery)
@@ -2108,17 +2108,10 @@ function renderPractice() {
                 ${practiceRules.shouldShowSlotMeta(state, index) && posLabel ? `<span>${posLabel} · ${word.vi}</span>` : ""}
               </div>
             `;
-  }).join("")}
-        </div>
-        ${shouldShowTeacherPreview(state)
-      ? `<div class="teacher-preview">
-          <span>${t("teacherPreview")}</span>
-          <strong>${itemNow.hanzi}</strong>
-          <em>${itemNow.tone}</em>
-        </div>`
-      : ""
+  }).join("")
+          
     }
-        <p id="feedback" class="feedback ${state.complete ? "good" : ""}">${state.complete ? t("continuePrompt") : ""}</p>
+       
       </section>
       <aside class="memory-panel ${state.complete ? "ready" : ""}">
         <p class="eyebrow">${t("answerTitle")}</p>

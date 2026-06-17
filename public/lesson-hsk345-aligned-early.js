@@ -115,20 +115,20 @@
           },
           {
             "stage": "word",
-            "vi": "bia",
-            "hanzi": "啤酒",
+            "vi": "trà xanh",
+            "hanzi": "绿茶",
             "words": [
               {
-                "text": "啤酒",
-                "pinyin": "píjiǔ",
-                "tone": "píjiǔ",
+                "text": "绿茶",
+                "pinyin": "lǜchá",
+                "tone": "lǜchá",
                 "pos": "word",
-                "vi": "bia"
+                "vi": "trà xanh"
               }
             ],
             "source": "Textbook alignment candidate - needs human PDF/OCR verification",
-            "pinyin": "píjiǔ",
-            "tone": "píjiǔ"
+            "pinyin": "lǜchá",
+            "tone": "lǜchá"
           },
           {
             "stage": "word",
@@ -824,7 +824,7 @@
           },
           {
             "stage": "phrase",
-            "vi": "đi sân bay đón người",
+            "vi": "Anh ấy sẽ về ngày mai",
             "hanzi": "去机场接人",
             "words": [
               {
@@ -832,7 +832,7 @@
                 "pinyin": "qù",
                 "tone": "qù",
                 "pos": "phrase",
-                "vi": "đi sân bay đón người"
+                "vi": "Anh ấy sẽ về ngày mai"
               },
               {
                 "text": "机场",
@@ -1104,34 +1104,62 @@
           },
           {
             "stage": "mixed",
-            "vi": "Khi nào anh ấy quay lại?",
-            "hanzi": "他什么时候回来",
+            "vi": "Sau khi cuộc họp kết thúc, tôi đi sân bay đón anh ấy.",
+            "hanzi": "会议结束以后我去机场接他",
             "words": [
               {
-                "text": "他",
-                "pinyin": "tā",
-                "tone": "tā",
+                "text": "会议",
+                "pinyin": "huìyì",
+                "tone": "huìyì",
                 "pos": "mixed",
-                "vi": "Khi nào anh ấy quay lại?"
+                "vi": "Sau khi cuộc họp kết thúc, tôi đi sân bay đón anh ấy."
               },
               {
-                "text": "什么时候",
-                "pinyin": "shénmeshíhòu",
-                "tone": "shénmeshíhòu",
+                "text": "结束",
+                "pinyin": "jiéshù",
+                "tone": "jiéshù",
                 "pos": "part",
                 "vi": ""
               },
               {
-                "text": "回来",
-                "pinyin": "huílái",
-                "tone": "huílái",
+                "text": "以后",
+                "pinyin": "yǐhòu",
+                "tone": "yǐhòu",
+                "pos": "part",
+                "vi": ""
+              },
+              {
+                "text": "我去",
+                "pinyin": "wǒqù",
+                "tone": "wǒqù",
+                "pos": "part",
+                "vi": ""
+              },
+              {
+                "text": "机场",
+                "pinyin": "jīchǎng",
+                "tone": "jīchǎng",
+                "pos": "part",
+                "vi": ""
+              },
+              {
+                "text": "接",
+                "pinyin": "jiē",
+                "tone": "jiē",
+                "pos": "part",
+                "vi": ""
+              },
+              {
+                "text": "他",
+                "pinyin": "tā",
+                "tone": "tā",
                 "pos": "part",
                 "vi": ""
               }
             ],
             "source": "Textbook alignment candidate - needs human PDF/OCR verification",
-            "pinyin": "tā shénmeshíhòu huílái",
-            "tone": "tā shénmeshíhòu huílái"
+            "pinyin": "huìyì jiéshù yǐhòu wǒqù jīchǎng jiē tā",
+            "tone": "huìyì jiéshù yǐhòu wǒqù jīchǎng jiē tā"
           },
           {
             "stage": "mixed",
@@ -1232,20 +1260,20 @@
           },
           {
             "stage": "word",
-            "vi": "trợ từ chỉ trạng thái tiếp diễn",
-            "hanzi": "着",
+            "vi": "ghế",
+            "hanzi": "椅子",
             "words": [
               {
-                "text": "着",
-                "pinyin": "zhe",
-                "tone": "zhe",
+                "text": "椅子",
+                "pinyin": "yǐzi",
+                "tone": "yǐzi",
                 "pos": "word",
-                "vi": "trợ từ chỉ trạng thái tiếp diễn"
+                "vi": "ghế"
               }
             ],
             "source": "Textbook alignment candidate - needs human PDF/OCR verification",
-            "pinyin": "zhe",
-            "tone": "zhe"
+            "pinyin": "yǐzi",
+            "tone": "yǐzi"
           },
           {
             "stage": "word",
@@ -1506,27 +1534,20 @@
           },
           {
             "stage": "sentence",
-            "vi": "Cái cốc ở bên cạnh sữa.",
-            "hanzi": "杯子在牛奶旁边",
+            "vi": "Cái cốc ở bên cạnh.",
+            "hanzi": "杯子就在旁边。",
             "words": [
               {
                 "text": "杯子",
                 "pinyin": "bēizi",
                 "tone": "bēizi",
                 "pos": "sentence",
-                "vi": "Cái cốc ở bên cạnh sữa."
+                "vi": "Cái cốc ở bên cạnh."
               },
               {
-                "text": "在",
-                "pinyin": "zài",
-                "tone": "zài",
-                "pos": "part",
-                "vi": ""
-              },
-              {
-                "text": "牛奶",
-                "pinyin": "niúnǎi",
-                "tone": "niúnǎi",
+                "text": "就在",
+                "pinyin": "jiùzài",
+                "tone": "jiùzài",
                 "pos": "part",
                 "vi": ""
               },
@@ -1539,8 +1560,8 @@
               }
             ],
             "source": "Textbook alignment candidate - needs human PDF/OCR verification",
-            "pinyin": "bēizi zài niúnǎi pángbiān",
-            "tone": "bēizi zài niúnǎi pángbiān"
+            "pinyin": "bēizi jiùzài pángbiān",
+            "tone": "bēizi jiùzài pángbiān"
           },
           {
             "stage": "sentence",
@@ -1620,55 +1641,41 @@
           },
           {
             "stage": "mixed",
-            "vi": "Trên bàn có để rất nhiều đồ uống.",
-            "hanzi": "桌子上放着很多饮料",
+            "vi": "Những chiếc cốc này đều là mới.",
+            "hanzi": "这些杯子都是新的",
             "words": [
               {
-                "text": "桌子",
-                "pinyin": "zhuōzi",
-                "tone": "zhuōzi",
+                "text": "这些",
+                "pinyin": "zhèxiē",
+                "tone": "zhèxiē",
                 "pos": "mixed",
-                "vi": "Trên bàn có để rất nhiều đồ uống."
+                "vi": "Những chiếc cốc này đều là mới."
               },
               {
-                "text": "上",
-                "pinyin": "shàng",
-                "tone": "shàng",
+                "text": "杯子",
+                "pinyin": "bēizi",
+                "tone": "bēizi",
                 "pos": "part",
                 "vi": ""
               },
               {
-                "text": "放",
-                "pinyin": "fàng",
-                "tone": "fàng",
+                "text": "都是",
+                "pinyin": "dōushì",
+                "tone": "dōushì",
                 "pos": "part",
                 "vi": ""
               },
               {
-                "text": "着",
-                "pinyin": "zhe",
-                "tone": "zhe",
-                "pos": "part",
-                "vi": ""
-              },
-              {
-                "text": "很多",
-                "pinyin": "hěnduō",
-                "tone": "hěnduō",
-                "pos": "part",
-                "vi": ""
-              },
-              {
-                "text": "饮料",
-                "pinyin": "yǐnliào",
-                "tone": "yǐnliào",
+                "text": "新的",
+                "pinyin": "xīnde",
+                "tone": "xīnde",
                 "pos": "part",
                 "vi": ""
               }
             ],
             "source": "Textbook alignment candidate - needs human PDF/OCR verification",
-            "pinyin": "zhuōzi shàng fàng zhe hěnduō yǐnliào",
-            "tone": "zhuōzi shàng fàng zhe hěnduō yǐnliào"
+            "pinyin": "zhèxiē bēizi dōushì xīnde",
+            "tone": "zhèxiē bēizi dōushì xīnde"
           },
           {
             "stage": "mixed",
@@ -2213,62 +2220,55 @@
           },
           {
             "stage": "mixed",
-            "vi": "Cô ấy luôn mỉm cười nói chuyện với khách.",
-            "hanzi": "她总是笑着跟客人说话",
+            "vi": "Khách cảm thấy dịch vụ ở đây rất tốt.",
+            "hanzi": "客人觉得这里的服务很好",
             "words": [
-              {
-                "text": "她",
-                "pinyin": "tā",
-                "tone": "tā",
-                "pos": "mixed",
-                "vi": "Cô ấy luôn mỉm cười nói chuyện với khách."
-              },
-              {
-                "text": "总是",
-                "pinyin": "zǒngshì",
-                "tone": "zǒngshì",
-                "pos": "part",
-                "vi": ""
-              },
-              {
-                "text": "笑",
-                "pinyin": "xiào",
-                "tone": "xiào",
-                "pos": "part",
-                "vi": ""
-              },
-              {
-                "text": "着",
-                "pinyin": "zhe",
-                "tone": "zhe",
-                "pos": "part",
-                "vi": ""
-              },
-              {
-                "text": "跟",
-                "pinyin": "gēn",
-                "tone": "gēn",
-                "pos": "part",
-                "vi": ""
-              },
               {
                 "text": "客人",
                 "pinyin": "kèrén",
                 "tone": "kèrén",
+                "pos": "mixed",
+                "vi": "Khách cảm thấy dịch vụ ở đây rất tốt."
+              },
+              {
+                "text": "觉得",
+                "pinyin": "juéde",
+                "tone": "juéde",
                 "pos": "part",
                 "vi": ""
               },
               {
-                "text": "说话",
-                "pinyin": "shuōhuà",
-                "tone": "shuōhuà",
+                "text": "这里",
+                "pinyin": "zhèlǐ",
+                "tone": "zhèlǐ",
+                "pos": "part",
+                "vi": ""
+              },
+              {
+                "text": "的",
+                "pinyin": "de",
+                "tone": "de",
+                "pos": "part",
+                "vi": ""
+              },
+              {
+                "text": "服务",
+                "pinyin": "fúwù",
+                "tone": "fúwù",
+                "pos": "part",
+                "vi": ""
+              },
+              {
+                "text": "很好",
+                "pinyin": "hěnhǎo",
+                "tone": "hěnhǎo",
                 "pos": "part",
                 "vi": ""
               }
             ],
             "source": "Textbook alignment candidate - needs human PDF/OCR verification",
-            "pinyin": "tā zǒngshì xiào zhe gēn kèrén shuōhuà",
-            "tone": "tā zǒngshì xiào zhe gēn kèrén shuōhuà"
+            "pinyin": "kèrén juéde zhèlǐ de fúwù hěnhǎo",
+            "tone": "kèrén juéde zhèlǐ de fúwù hěnhǎo"
           },
           {
             "stage": "mixed",
@@ -2771,72 +2771,34 @@
           },
           {
             "stage": "mixed",
-            "vi": "Dạo này tôi càng ngày càng béo.",
-            "hanzi": "我最近越来越胖了",
+            "vi": "Dạo này ngày nào tôi cũng đi vận động.",
+            "hanzi": "最近我每天都去运动",
             "words": [
-              {
-                "text": "我",
-                "pinyin": "wǒ",
-                "tone": "wǒ",
-                "pos": "mixed",
-                "vi": "Dạo này tôi càng ngày càng béo."
-              },
               {
                 "text": "最近",
                 "pinyin": "zuìjìn",
                 "tone": "zuìjìn",
-                "pos": "part",
-                "vi": ""
-              },
-              {
-                "text": "越来越",
-                "pinyin": "yuèláiyuè",
-                "tone": "yuèláiyuè",
-                "pos": "part",
-                "vi": ""
-              },
-              {
-                "text": "胖",
-                "pinyin": "pàng",
-                "tone": "pàng",
-                "pos": "part",
-                "vi": ""
-              },
-              {
-                "text": "了",
-                "pinyin": "liǎo",
-                "tone": "liǎo",
-                "pos": "part",
-                "vi": ""
-              }
-            ],
-            "source": "Textbook alignment candidate - needs human PDF/OCR verification",
-            "pinyin": "wǒ zuìjìn yuèláiyuè pàng liǎo",
-            "tone": "wǒ zuìjìn yuèláiyuè pàng liǎo"
-          },
-          {
-            "stage": "mixed",
-            "vi": "Bạn nên vận động nhiều hơn.",
-            "hanzi": "你应该多运动",
-            "words": [
-              {
-                "text": "你",
-                "pinyin": "nǐ",
-                "tone": "nǐ",
                 "pos": "mixed",
-                "vi": "Bạn nên vận động nhiều hơn."
+                "vi": "Dạo này ngày nào tôi cũng đi vận động."
               },
               {
-                "text": "应该",
-                "pinyin": "yīnggāi",
-                "tone": "yīnggāi",
+                "text": "我",
+                "pinyin": "wǒ",
+                "tone": "wǒ",
                 "pos": "part",
                 "vi": ""
               },
               {
-                "text": "多",
-                "pinyin": "duō",
-                "tone": "duō",
+                "text": "每天",
+                "pinyin": "měitiān",
+                "tone": "měitiān",
+                "pos": "part",
+                "vi": ""
+              },
+              {
+                "text": "都去",
+                "pinyin": "dōuqù",
+                "tone": "dōuqù",
                 "pos": "part",
                 "vi": ""
               },
@@ -2849,8 +2811,53 @@
               }
             ],
             "source": "Textbook alignment candidate - needs human PDF/OCR verification",
-            "pinyin": "nǐ yīnggāi duō yùndòng",
-            "tone": "nǐ yīnggāi duō yùndòng"
+            "pinyin": "zuìjìn wǒ měitiān dōuqù yùndòng",
+            "tone": "zuìjìn wǒ měitiān dōuqù yùndòng"
+          },
+          {
+            "stage": "mixed",
+            "vi": "Ăn quá nhiều dễ béo lên.",
+            "hanzi": "吃得太多容易变胖",
+            "words": [
+              {
+                "text": "吃得",
+                "pinyin": "chīdé",
+                "tone": "chīdé",
+                "pos": "mixed",
+                "vi": "Ăn quá nhiều dễ béo lên."
+              },
+              {
+                "text": "太多",
+                "pinyin": "tàiduō",
+                "tone": "tàiduō",
+                "pos": "part",
+                "vi": ""
+              },
+              {
+                "text": "容易",
+                "pinyin": "róngyì",
+                "tone": "róngyì",
+                "pos": "part",
+                "vi": ""
+              },
+              {
+                "text": "变",
+                "pinyin": "biàn",
+                "tone": "biàn",
+                "pos": "part",
+                "vi": ""
+              },
+              {
+                "text": "胖",
+                "pinyin": "pàng",
+                "tone": "pàng",
+                "pos": "part",
+                "vi": ""
+              }
+            ],
+            "source": "Textbook alignment candidate - needs human PDF/OCR verification",
+            "pinyin": "chīdé tàiduō róngyì biàn pàng",
+            "tone": "chīdé tàiduō róngyì biàn pàng"
           }
         ]
       }
@@ -3341,34 +3348,48 @@
           },
           {
             "stage": "mixed",
-            "vi": "Tình yêu có thể rất giản dị.",
-            "hanzi": "爱情可以很简单",
+            "vi": "Cuộc sống giản dị cũng có tình yêu.",
+            "hanzi": "简单的生活也有爱情",
             "words": [
               {
-                "text": "爱情",
-                "pinyin": "àiqíng",
-                "tone": "àiqíng",
+                "text": "简单",
+                "pinyin": "jiǎndān",
+                "tone": "jiǎndān",
                 "pos": "mixed",
-                "vi": "Tình yêu có thể rất giản dị."
+                "vi": "Cuộc sống giản dị cũng có tình yêu."
               },
               {
-                "text": "可以",
-                "pinyin": "kěyǐ",
-                "tone": "kěyǐ",
+                "text": "的",
+                "pinyin": "de",
+                "tone": "de",
                 "pos": "part",
                 "vi": ""
               },
               {
-                "text": "很简单",
-                "pinyin": "hěnjiǎndān",
-                "tone": "hěnjiǎndān",
+                "text": "生活",
+                "pinyin": "shēnghuó",
+                "tone": "shēnghuó",
+                "pos": "part",
+                "vi": ""
+              },
+              {
+                "text": "也有",
+                "pinyin": "yěyǒu",
+                "tone": "yěyǒu",
+                "pos": "part",
+                "vi": ""
+              },
+              {
+                "text": "爱情",
+                "pinyin": "àiqíng",
+                "tone": "àiqíng",
                 "pos": "part",
                 "vi": ""
               }
             ],
             "source": "Textbook alignment candidate - needs human PDF/OCR verification",
-            "pinyin": "àiqíng kěyǐ hěnjiǎndān",
-            "tone": "àiqíng kěyǐ hěnjiǎndān"
+            "pinyin": "jiǎndān de shēnghuó yěyǒu àiqíng",
+            "tone": "jiǎndān de shēnghuó yěyǒu àiqíng"
           }
         ]
       },
@@ -3892,34 +3913,27 @@
           },
           {
             "stage": "mixed",
-            "vi": "Người bạn thật sự sẽ giúp đỡ lẫn nhau.",
-            "hanzi": "真正的朋友会互相帮助",
+            "vi": "Bạn bè nên tin tưởng lẫn nhau.",
+            "hanzi": "朋友之间应该互相信任",
             "words": [
-              {
-                "text": "真正",
-                "pinyin": "zhēnzhèng",
-                "tone": "zhēnzhèng",
-                "pos": "mixed",
-                "vi": "Người bạn thật sự sẽ giúp đỡ lẫn nhau."
-              },
-              {
-                "text": "的",
-                "pinyin": "de",
-                "tone": "de",
-                "pos": "part",
-                "vi": ""
-              },
               {
                 "text": "朋友",
                 "pinyin": "péngyǒu",
                 "tone": "péngyǒu",
+                "pos": "mixed",
+                "vi": "Bạn bè nên tin tưởng lẫn nhau."
+              },
+              {
+                "text": "之间",
+                "pinyin": "zhījiān",
+                "tone": "zhījiān",
                 "pos": "part",
                 "vi": ""
               },
               {
-                "text": "会",
-                "pinyin": "huì",
-                "tone": "huì",
+                "text": "应该",
+                "pinyin": "yīnggāi",
+                "tone": "yīnggāi",
                 "pos": "part",
                 "vi": ""
               },
@@ -3931,16 +3945,16 @@
                 "vi": ""
               },
               {
-                "text": "帮助",
-                "pinyin": "bāngzhù",
-                "tone": "bāngzhù",
+                "text": "信任",
+                "pinyin": "xìnrèn",
+                "tone": "xìnrèn",
                 "pos": "part",
                 "vi": ""
               }
             ],
             "source": "Textbook alignment candidate - needs human PDF/OCR verification",
-            "pinyin": "zhēnzhèng de péngyǒu huì hùxiāng bāngzhù",
-            "tone": "zhēnzhèng de péngyǒu huì hùxiāng bāngzhù"
+            "pinyin": "péngyǒu zhījiān yīnggāi hùxiāng xìnrèn",
+            "tone": "péngyǒu zhījiān yīnggāi hùxiāng xìnrèn"
           }
         ]
       },
@@ -4450,27 +4464,55 @@
           },
           {
             "stage": "mixed",
-            "vi": "Người quản lý có ấn tượng tốt với tôi.",
-            "hanzi": "经理对我的印象不错",
+            "vi": "Buổi phỏng vấn lần này để lại ấn tượng tốt cho quản lý.",
+            "hanzi": "这次面试给经理留下了好印象",
             "words": [
               {
-                "text": "经理",
-                "pinyin": "jīnglǐ",
-                "tone": "jīnglǐ",
+                "text": "这次",
+                "pinyin": "zhècì",
+                "tone": "zhècì",
                 "pos": "mixed",
-                "vi": "Người quản lý có ấn tượng tốt với tôi."
+                "vi": "Buổi phỏng vấn lần này để lại ấn tượng tốt cho quản lý."
               },
               {
-                "text": "对",
-                "pinyin": "duì",
-                "tone": "duì",
+                "text": "面试",
+                "pinyin": "miànshì",
+                "tone": "miànshì",
                 "pos": "part",
                 "vi": ""
               },
               {
-                "text": "我的",
-                "pinyin": "wǒde",
-                "tone": "wǒde",
+                "text": "给",
+                "pinyin": "gěi",
+                "tone": "gěi",
+                "pos": "part",
+                "vi": ""
+              },
+              {
+                "text": "经理",
+                "pinyin": "jīnglǐ",
+                "tone": "jīnglǐ",
+                "pos": "part",
+                "vi": ""
+              },
+              {
+                "text": "留下",
+                "pinyin": "liúxià",
+                "tone": "liúxià",
+                "pos": "part",
+                "vi": ""
+              },
+              {
+                "text": "了",
+                "pinyin": "liǎo",
+                "tone": "liǎo",
+                "pos": "part",
+                "vi": ""
+              },
+              {
+                "text": "好",
+                "pinyin": "hǎo",
+                "tone": "hǎo",
                 "pos": "part",
                 "vi": ""
               },
@@ -4480,18 +4522,11 @@
                 "tone": "yìnxiàng",
                 "pos": "part",
                 "vi": ""
-              },
-              {
-                "text": "不错",
-                "pinyin": "búcuò",
-                "tone": "búcuò",
-                "pos": "part",
-                "vi": ""
               }
             ],
             "source": "Textbook alignment candidate - needs human PDF/OCR verification",
-            "pinyin": "jīnglǐ duì wǒde yìnxiàng búcuò",
-            "tone": "jīnglǐ duì wǒde yìnxiàng búcuò"
+            "pinyin": "zhècì miànshì gěi jīnglǐ liúxià liǎo hǎo yìnxiàng",
+            "tone": "zhècì miànshì gěi jīnglǐ liúxià liǎo hǎo yìnxiàng"
           }
         ]
       },
@@ -5001,55 +5036,55 @@
           },
           {
             "stage": "mixed",
-            "vi": "Người trẻ đừng quá vội kiếm tiền.",
-            "hanzi": "年轻人不要太着急赚钱",
+            "vi": "Trước khi kiếm tiền, hãy nghĩ rõ kế hoạch trước.",
+            "hanzi": "赚钱以前先把计划想清楚",
             "words": [
-              {
-                "text": "年轻",
-                "pinyin": "niánqīng",
-                "tone": "niánqīng",
-                "pos": "mixed",
-                "vi": "Người trẻ đừng quá vội kiếm tiền."
-              },
-              {
-                "text": "人",
-                "pinyin": "rén",
-                "tone": "rén",
-                "pos": "part",
-                "vi": ""
-              },
-              {
-                "text": "不要",
-                "pinyin": "búyào",
-                "tone": "búyào",
-                "pos": "part",
-                "vi": ""
-              },
-              {
-                "text": "太",
-                "pinyin": "tài",
-                "tone": "tài",
-                "pos": "part",
-                "vi": ""
-              },
-              {
-                "text": "着急",
-                "pinyin": "zháojí",
-                "tone": "zháojí",
-                "pos": "part",
-                "vi": ""
-              },
               {
                 "text": "赚钱",
                 "pinyin": "zhuànqián",
                 "tone": "zhuànqián",
+                "pos": "mixed",
+                "vi": "Trước khi kiếm tiền, hãy nghĩ rõ kế hoạch trước."
+              },
+              {
+                "text": "以前",
+                "pinyin": "yǐqián",
+                "tone": "yǐqián",
+                "pos": "part",
+                "vi": ""
+              },
+              {
+                "text": "先把",
+                "pinyin": "xiānbǎ",
+                "tone": "xiānbǎ",
+                "pos": "part",
+                "vi": ""
+              },
+              {
+                "text": "计划",
+                "pinyin": "jìhuà",
+                "tone": "jìhuà",
+                "pos": "part",
+                "vi": ""
+              },
+              {
+                "text": "想",
+                "pinyin": "xiǎng",
+                "tone": "xiǎng",
+                "pos": "part",
+                "vi": ""
+              },
+              {
+                "text": "清楚",
+                "pinyin": "qīngchǔ",
+                "tone": "qīngchǔ",
                 "pos": "part",
                 "vi": ""
               }
             ],
             "source": "Textbook alignment candidate - needs human PDF/OCR verification",
-            "pinyin": "niánqīng rén búyào tài zháojí zhuànqián",
-            "tone": "niánqīng rén búyào tài zháojí zhuànqián"
+            "pinyin": "zhuànqián yǐqián xiānbǎ jìhuà xiǎng qīngchǔ",
+            "tone": "zhuànqián yǐqián xiānbǎ jìhuà xiǎng qīngchǔ"
           }
         ]
       },
@@ -5538,55 +5573,62 @@
           },
           {
             "stage": "mixed",
-            "vi": "Chỉ mua thứ phù hợp thì mới không lãng phí tiền.",
-            "hanzi": "只买对的才不会浪费钱",
+            "vi": "Trước khi mua đồ, cần nghĩ rõ mình cần gì.",
+            "hanzi": "买东西以前要想清楚需要什么",
             "words": [
               {
-                "text": "只买",
-                "pinyin": "zhīmǎi",
-                "tone": "zhīmǎi",
+                "text": "买东西",
+                "pinyin": "mǎidōngxī",
+                "tone": "mǎidōngxī",
                 "pos": "mixed",
-                "vi": "Chỉ mua thứ phù hợp thì mới không lãng phí tiền."
+                "vi": "Trước khi mua đồ, cần nghĩ rõ mình cần gì."
               },
               {
-                "text": "对",
-                "pinyin": "duì",
-                "tone": "duì",
+                "text": "以前",
+                "pinyin": "yǐqián",
+                "tone": "yǐqián",
                 "pos": "part",
                 "vi": ""
               },
               {
-                "text": "的",
-                "pinyin": "de",
-                "tone": "de",
+                "text": "要",
+                "pinyin": "yào",
+                "tone": "yào",
                 "pos": "part",
                 "vi": ""
               },
               {
-                "text": "才不会",
-                "pinyin": "cáibúhuì",
-                "tone": "cáibúhuì",
+                "text": "想",
+                "pinyin": "xiǎng",
+                "tone": "xiǎng",
                 "pos": "part",
                 "vi": ""
               },
               {
-                "text": "浪费",
-                "pinyin": "làngfèi",
-                "tone": "làngfèi",
+                "text": "清楚",
+                "pinyin": "qīngchǔ",
+                "tone": "qīngchǔ",
                 "pos": "part",
                 "vi": ""
               },
               {
-                "text": "钱",
-                "pinyin": "qián",
-                "tone": "qián",
+                "text": "需要",
+                "pinyin": "xūyào",
+                "tone": "xūyào",
+                "pos": "part",
+                "vi": ""
+              },
+              {
+                "text": "什么",
+                "pinyin": "shénme",
+                "tone": "shénme",
                 "pos": "part",
                 "vi": ""
               }
             ],
             "source": "Textbook alignment candidate - needs human PDF/OCR verification",
-            "pinyin": "zhīmǎi duì de cáibúhuì làngfèi qián",
-            "tone": "zhīmǎi duì de cáibúhuì làngfèi qián"
+            "pinyin": "mǎidōngxī yǐqián yào xiǎng qīngchǔ xūyào shénme",
+            "tone": "mǎidōngxī yǐqián yào xiǎng qīngchǔ xūyào shénme"
           }
         ]
       }
