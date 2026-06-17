@@ -1924,16 +1924,23 @@
               "hanzi": "准备考试",
               "words": [
                 {
+                  "text": "准备",
+                  "pinyin": "Zhǔnbèi",
+                  "tone": "Zhǔnbèi",
+                  "pos": "verb",
+                  "vi": "chuẩn bị"
+                },
+                {
                   "text": "考试",
                   "pinyin": "kǎoshì",
-                  "tone": "kǎo shì",
+                  "tone": "kǎoshì",
                   "pos": "noun",
                   "vi": "kỳ thi"
                 }
               ],
               "source": "Textbook alignment candidate batch 2 - needs human PDF/OCR verification",
-              "pinyin": "kǎoshì",
-              "tone": "kǎo shì"
+              "pinyin": "zhun bei kao shi",
+              "tone": "zhǔn bèi kǎo shì"
             },
             {
               "stage": "phrase",
@@ -6415,6 +6422,13 @@
                   "vi": "đồng hồ báo thức"
                 },
                 {
+                  "text": "的",
+                  "pinyin": "de",
+                  "tone": "de",
+                  "pos": "particle",
+                  "vi": "của"
+                },
+                {
                   "text": "危害",
                   "pinyin": "wei hai",
                   "tone": "wēi hài",
@@ -6423,8 +6437,8 @@
                 }
               ],
               "source": "Textbook alignment candidate batch 2 - needs human PDF/OCR verification",
-              "pinyin": "nao zhong wei hai",
-              "tone": "nào zhōng wēi hài"
+              "pinyin": "nao zhong de wei hai",
+              "tone": "nào zhōng de wēi hài"
             },
             {
               "stage": "phrase",
@@ -6504,6 +6518,13 @@
               "hanzi": "注意休息",
               "words": [
                 {
+                  "text": "注意",
+                  "pinyin": "zhu yi",
+                  "tone": "zhù yì",
+                  "pos": "verb",
+                  "vi": "chú ý"
+                },
+                {
                   "text": "休息",
                   "pinyin": "xiu xi",
                   "tone": "xiū xi",
@@ -6512,13 +6533,13 @@
                 }
               ],
               "source": "Textbook alignment candidate batch 2 - needs human PDF/OCR verification",
-              "pinyin": "xiu xi",
-              "tone": "xiū xi"
+              "pinyin": "zhu yi xiu xi",
+              "tone": "zhù yì xiū xi"
             },
             {
-              "stage": "sentence",
-              "vi": "Đồng hồ báo thức có thể ảnh hưởng đến giấc ngủ.",
-              "hanzi": "闹钟可能会影响睡眠",
+              "stage": "mixed",
+              "vi": "Tác hại của đồng hồ báo thức.",
+              "hanzi": "闹钟的坏处",
               "words": [
                 {
                   "text": "闹钟",
@@ -6528,23 +6549,22 @@
                   "vi": "đồng hồ báo thức"
                 },
                 {
-                  "text": "影响",
-                  "pinyin": "ying xiang",
-                  "tone": "yǐng xiǎng",
-                  "pos": "verb",
-                  "vi": "ảnh hưởng"
+                  "text": "的",
+                  "pinyin": "de",
+                  "tone": "de",
+                  "pos": "particle",
+                  "vi": "của"
                 },
                 {
-                  "text": "睡眠",
-                  "pinyin": "shui mian",
-                  "tone": "shuì mián",
+                  "text": "坏处",
+                  "pinyin": "huai chu",
+                  "tone": "huài chù",
                   "pos": "noun",
-                  "vi": "giấc ngủ"
+                  "vi": "tác hại, nhược điểm"
                 }
               ],
-              "source": "Textbook alignment candidate batch 2 - needs human PDF/OCR verification",
-              "pinyin": "nao zhong ying xiang shui mian",
-              "tone": "nào zhōng yǐng xiǎng shuì mián"
+              "pinyin": "nao zhong de huai chu",
+              "tone": "nào zhōng de huài chù"
             },
             {
               "stage": "sentence",
