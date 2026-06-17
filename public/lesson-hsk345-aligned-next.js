@@ -1996,7 +1996,7 @@
               "words": [
                 {
                   "text": "觉得",
-                  "pinyin": "wǒ juédé  bǐjiào róngyì",
+                  "pinyin": "wǒ juédé",
                   "tone": "wǒ juédé",
                   "pos": "verb",
                   "vi": "cảm thấy, cho rằng"
@@ -2010,8 +2010,8 @@
                 },
                 {
                   "text": "容易",
-                  "pinyin": "róngyì",
-                  "tone": "róngyì",
+                  "pinyin": "bǐjiào róngyì",
+                  "tone": "bǐjiào róngyì",
                   "pos": "adj",
                   "vi": "dễ"
                 }
@@ -2048,40 +2048,40 @@
             {
               "stage": "mixed",
               "vi": "Toán khó hơn lịch sử nhiều.",
-              "hanzi": "数学比历史难多了",
+              "hanzi": "數學比歷史難得多",
               "words": [
                 {
                   "text": "数学",
-                  "pinyin": "shu xue",
-                  "tone": "shù xué",
+                  "pinyin": "Shùxué ",
+                  "tone": "Shùxué ",
                   "pos": "noun",
                   "vi": "toán học"
                 },
                 {
                   "text": "比",
-                  "pinyin": "bi",
+                  "pinyin": "bǐ",
                   "tone": "bǐ",
                   "pos": "prep",
                   "vi": "so với"
                 },
                 {
                   "text": "历史",
-                  "pinyin": "li shi",
-                  "tone": "lì shǐ",
+                  "pinyin": "lìshǐ",
+                  "tone": "lìshǐ ",
                   "pos": "noun",
                   "vi": "lịch sử"
                 },
                 {
                   "text": "难",
-                  "pinyin": "nan",
-                  "tone": "nán",
+                  "pinyin": "nándé ",
+                  "tone": "nándé ",
                   "pos": "adj",
                   "vi": "khó"
                 },
                 {
-                  "text": "多了",
-                  "pinyin": "duo le",
-                  "tone": "duō le",
+                  "text": "多",
+                  "pinyin": "duō",
+                  "tone": "duō",
                   "pos": "adv",
                   "vi": "hơn nhiều, rất nhiều"
                 }
@@ -2089,43 +2089,29 @@
             },
             {
               "stage": "mixed",
-              "vi": "Toán khó hơn lịch sử nhiều.",
-              "hanzi": "数学比历史难多了",
+              "vi": "Toán là môn khó nhất.",
+              "hanzi": "数学是最难的科目。",
               "words": [
                 {
                   "text": "数学",
-                  "pinyin": "shu xue",
-                  "tone": "shù xué",
+                  "pinyin": "Shùxué",
+                  "tone": "Shùxué",
                   "pos": "noun",
                   "vi": "toán học"
                 },
                 {
-                  "text": "比",
-                  "pinyin": "bi",
-                  "tone": "bǐ",
+                  "text": "是最难的",
+                  "pinyin": "shì zuì nán",
+                  "tone": "shì zuì nán",
                   "pos": "prep",
-                  "vi": "so với"
+                  "vi": "là khó nhất"
                 },
                 {
-                  "text": "历史",
-                  "pinyin": "li shi",
-                  "tone": "lì shǐ",
+                  "text": "科目",
+                  "pinyin": "kēmù",
+                  "tone": "kēmù",
                   "pos": "noun",
-                  "vi": "lịch sử"
-                },
-                {
-                  "text": "难",
-                  "pinyin": "nan",
-                  "tone": "nán",
-                  "pos": "adj",
-                  "vi": "khó"
-                },
-                {
-                  "text": "难",
-                  "pinyin": "duōle",
-                  "tone": "duōle",
-                  "pos": "adj",
-                  "vi": "khó"
+                  "vi": "môn học"
                 }
               ],
               "source": "Textbook alignment candidate batch 2 - needs human PDF/OCR verification",
@@ -6532,29 +6518,29 @@
             },
             {
               "stage": "mixed",
-              "vi": "Tác hại của đồng hồ báo thức.",
-              "hanzi": "闹钟的坏处",
+              "vi": "Ảnh hưởng hiệu suất làm việc",
+              "hanzi": "對工作績效的影響",
               "words": [
                 {
-                  "text": "闹钟",
-                  "pinyin": "nao zhong",
-                  "tone": "nào zhōng",
+                  "text": "對工作",
+                  "pinyin": "duì gōng zuò",
+                  "tone": "duì gōng zuò",
                   "pos": "noun",
-                  "vi": "đồng hồ báo thức"
+                  "vi": "Đối với công việc"
                 },
                 {
-                  "text": "的",
-                  "pinyin": "de",
-                  "tone": "de",
+                  "text": "績效",
+                  "pinyin": "jì xiào",
+                  "tone": "jì xiào",
                   "pos": "particle",
-                  "vi": "của"
+                  "vi": "hiệu suất, thành tích công việc"
                 },
                 {
-                  "text": "坏处",
+                  "text": "影響",
                   "pinyin": "huai chu",
                   "tone": "huài chù",
                   "pos": "noun",
-                  "vi": "tác hại, nhược điểm"
+                  "vi": "ảnh hưởng"
                 }
               ],
               "pinyin": "nao zhong de huai chu",
@@ -6563,21 +6549,28 @@
             {
               "stage": "sentence",
               "vi": "Giấc ngủ không tốt sẽ tạo áp lực cho cơ thể.",
-              "hanzi": "睡眠不好会给身体带来压力",
+              "hanzi": "睡眠不足會給身體帶來壓力",
               "words": [
                 {
-                  "text": "睡眠",
-                  "pinyin": "shui mian",
-                  "tone": "shuì mián",
+                  "text": "睡眠不足",
+                  "pinyin": "Shuìmián bùzú",
+                  "tone": "Shuìmián bùzú",
                   "pos": "noun",
                   "vi": "giấc ngủ"
                 },
                 {
-                  "text": "压力",
-                  "pinyin": "ya li",
-                  "tone": "yā lì",
+                  "text": "會給身體帶來",
+                  "pinyin": "huì gěi shēntǐ dài lái",
+                  "tone": "huì gěi shēntǐ dài lái",
                   "pos": "noun",
-                  "vi": "áp lực"
+                  "vi": "mang lại / gây ra cho cơ thể"
+                },
+                {
+                  "text": "壓力",
+                  "pinyin": "yālì",
+                  "tone": "yālì",
+                  "pos": "noun",
+                  "vi": "áp lực, căng thẳng"
                 }
               ],
               "source": "Textbook alignment candidate batch 2 - needs human PDF/OCR verification",
@@ -6590,25 +6583,32 @@
               "hanzi": "我们应该调整休息时间",
               "words": [
                 {
-                  "text": "调整",
-                  "pinyin": "tiao zheng",
-                  "tone": "tiáo zhěng",
+                  "text": "我们",
+                  "pinyin": "wǒmen",
+                  "tone": "wǒmen",
+                  "pos": "pronoun",
+                  "vi": "Chúng tôi / Chúng ta"
+                },
+                {
+                  "text": "应该",
+                  "pinyin": "yīnggāi",
+                  "tone": "yīnggāi",
                   "pos": "verb",
+                  "vi": "nên, cần nên"
+                },
+                {
+                  "text": "调整",
+                  "pinyin": "tiáozhěng",
+                  "tone": "tiáozhěng",
+                  "pos": "noun",
                   "vi": "điều chỉnh"
                 },
                 {
-                  "text": "休息",
-                  "pinyin": "xiu xi",
-                  "tone": "xiū xi",
-                  "pos": "verb",
-                  "vi": "nghỉ ngơi"
-                },
-                {
-                  "text": "时间",
-                  "pinyin": "shi jian",
-                  "tone": "shí jiān",
+                  "text": "休息时间",
+                  "pinyin": "xiūxi shíjiān",
+                  "tone": "xiūxi shíjiān",
                   "pos": "noun",
-                  "vi": "thời gian"
+                  "vi": "thời gian nghỉ ngơi"
                 }
               ],
               "source": "Textbook alignment candidate batch 2 - needs human PDF/OCR verification",
@@ -6618,21 +6618,35 @@
             {
               "stage": "sentence",
               "vi": "Thói quen tốt rất quan trọng đối với sức khỏe.",
-              "hanzi": "好的习惯对健康很重要",
+              "hanzi": "良好的習慣對健康非常重要。",
               "words": [
                 {
-                  "text": "习惯",
-                  "pinyin": "xi guan",
-                  "tone": "xí guàn",
+                  "text": "良好的",
+                  "pinyin": "hǎo de",
+                  "tone": "hǎo de",
+                  "pos": "noun",
+                  "vi": "Tốt, tốt đẹp"
+                },
+                {
+                  "text": "習慣",
+                  "pinyin": "xíguàn",
+                  "tone": "xíguàn",
                   "pos": "noun",
                   "vi": "thói quen"
                 },
                 {
-                  "text": "健康",
-                  "pinyin": "jian kang",
-                  "tone": "jiàn kāng",
-                  "pos": "adj",
-                  "vi": "khỏe mạnh"
+                  "text": "對健康",
+                  "pinyin": "duì jiànkāng",
+                  "tone": "duì jiànkāng",
+                  "pos": "noun",
+                  "vi": "đối với sức khỏe"
+                },
+                {
+                  "text": "非常重要",
+                  "pinyin": "hěn zhòngyào",
+                  "tone": "hěn zhòngyào",
+                  "pos": "noun",
+                  "vi": "rất quan trọng"
                 }
               ],
               "source": "Textbook alignment candidate batch 2 - needs human PDF/OCR verification",
@@ -6642,26 +6656,26 @@
             {
               "stage": "mixed",
               "vi": "Đồng hồ báo thức có thể ảnh hưởng giấc ngủ.",
-              "hanzi": "闹钟可能影响睡眠",
+              "hanzi": "鬧鐘會幹擾睡眠。",
               "words": [
                 {
-                  "text": "闹钟",
-                  "pinyin": "nao zhong",
-                  "tone": "nào zhōng",
+                  "text": "鬧鐘",
+                  "pinyin": "nàozhōng kěnéng",
+                  "tone": "nàozhōng kěnéng",
                   "pos": "noun",
-                  "vi": "đồng hồ báo thức"
+                  "vi": "Đồng hồ báo thức"
                 },
                 {
-                  "text": "影响",
-                  "pinyin": "ying xiang",
-                  "tone": "yǐng xiǎng",
+                  "text": "會幹擾",
+                  "pinyin": "huì yǐngxiǎng",
+                  "tone": "huì yǐngxiǎng",
                   "pos": "verb",
                   "vi": "ảnh hưởng"
                 },
                 {
                   "text": "睡眠",
-                  "pinyin": "shui mian",
-                  "tone": "shuì mián",
+                  "pinyin": "shuìmián",
+                  "tone": "shuìmián",
                   "pos": "noun",
                   "vi": "giấc ngủ"
                 }
