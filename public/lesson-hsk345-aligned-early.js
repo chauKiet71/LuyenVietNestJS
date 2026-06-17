@@ -2624,8 +2624,8 @@
               },
               {
                 "text": "了",
-                "pinyin": "liǎo",
-                "tone": "liǎo",
+                "pinyin": "le",
+                "tone": "le",
                 "pos": "part",
                 "vi": ""
               }
@@ -2821,8 +2821,8 @@
             "words": [
               {
                 "text": "吃得",
-                "pinyin": "chīdé",
-                "tone": "chīdé",
+                "pinyin": "chī de",
+                "tone": "chī de",
                 "pos": "mixed",
                 "vi": "Ăn quá nhiều dễ béo lên."
               },

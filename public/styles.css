@@ -5765,6 +5765,105 @@ p {
   margin-left: 40px;
 }
 
+/* Compact learning header for practice and completion screens */
+.screen-practice .app-top,
+.screen-complete .app-top {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  position: sticky !important;
+  top: 0 !important;
+  padding: 0 !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+  border: none !important;
+  border-bottom: 1px solid #dbe8ef !important;
+  border-radius: 0 !important;
+  box-shadow: 0 10px 24px rgba(15, 35, 60, 0.05) !important;
+  backdrop-filter: blur(14px);
+  z-index: 1000 !important;
+}
+
+.screen-practice .app-top-inner,
+.screen-complete .app-top-inner {
+  display: grid !important;
+  grid-template-columns: 44px auto 1fr auto !important;
+  gap: 12px !important;
+  width: min(1220px, calc(100% - 32px)) !important;
+  max-width: 1220px !important;
+  min-height: 72px !important;
+  margin: 0 auto !important;
+  padding: 10px 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  overflow: visible !important;
+}
+
+.screen-practice .app-top-inner::before,
+.screen-complete .app-top-inner::before {
+  display: none !important;
+}
+
+.screen-practice .brand,
+.screen-complete .brand {
+  width: auto !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  gap: 10px !important;
+}
+
+.screen-practice .brand-logo,
+.screen-complete .brand-logo {
+  width: 42px !important;
+  height: 42px !important;
+  flex-basis: 42px !important;
+  border-radius: 50% !important;
+  border: 1px solid #c8d9e8 !important;
+  box-shadow: 0 4px 12px rgba(18, 42, 70, 0.08) !important;
+}
+
+.screen-practice #brandSubtitle,
+.screen-complete #brandSubtitle,
+.screen-practice .header-nav,
+.screen-complete .header-nav {
+  display: none !important;
+}
+
+.screen-practice .icon-btn,
+.screen-complete .icon-btn {
+  width: 44px !important;
+  min-height: 44px !important;
+  border-radius: 14px !important;
+  font-size: 28px !important;
+  background: #ffffff !important;
+  box-shadow: 0 6px 14px rgba(18, 42, 70, 0.08), inset 0 -2px 0 #dce8f2 !important;
+}
+
+.screen-practice .top-actions,
+.screen-complete .top-actions {
+  justify-self: end !important;
+  padding: 0 !important;
+  gap: 8px !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+.screen-practice .pill-btn,
+.screen-complete .pill-btn,
+.screen-practice .lang-toggle,
+.screen-complete .lang-toggle {
+  min-height: 46px !important;
+  border-radius: 14px !important;
+  padding: 0 18px !important;
+  background: #ffffff !important;
+  box-shadow: 0 6px 14px rgba(18, 42, 70, 0.07), inset 0 -2px 0 #dce8f2 !important;
+}
+
 .nav-item {
   background: transparent;
   border: none;

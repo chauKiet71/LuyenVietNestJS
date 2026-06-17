@@ -1823,15 +1823,15 @@
         },
         {
           "stage": "phrase",
-          "vi": "đậu phỏng vấn",
-          "hanzi": "通过面试",
+          "vi": "chuẩn bị phỏng vấn",
+          "hanzi": "准备面试",
           "words": [
             {
-              "text": "通过",
-              "pinyin": "tong guo",
-              "tone": "tōngguò",
+              "text": "准备",
+              "pinyin": "zhun bei",
+              "tone": "zhǔnbèi",
               "pos": "verb",
-              "vi": "được thông qua, vượt qua"
+              "vi": "chuẩn bị"
             },
             {
               "text": "面试",
@@ -1842,8 +1842,8 @@
             }
           ],
           "source": "high-frequency-source:job_interview",
-          "pinyin": "tong guo mian shi",
-          "tone": "tōngguò miànshì"
+          "pinyin": "zhun bei mian shi",
+          "tone": "zhǔnbèi miànshì"
         },
         {
           "stage": "phrase",
