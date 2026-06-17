@@ -2026,30 +2026,24 @@
               "hanzi": "考试前你必须认真复习",
               "words": [
                 {
-                  "text": "考试前",
-                  "pinyin": "kǎoshì qián",
-                  "tone": "kǎoshì qián",
-                  "pos": "noun",
-                  "vi": "kỳ thi"
+                  "text": "考试以前",
+                  "pinyin": "kǎoshì yǐqián",
+                  "tone": "kǎoshì yǐqián"
                 },
                 {
-                  "text": "你必须",
-                  "pinyin": "nǐ bìxū",
-                  "tone": "nǐ bìxū",
-                  "pos": "verb",
-                  "vi": "ôn tập"
+                  "text": "要",
+                  "pinyin": "yào",
+                  "tone": "yào"
                 },
                 {
                   "text": "认真复习",
                   "pinyin": "rènzhēn fùxí",
-                  "tone": "rènzhēn fùxí",
-                  "pos": "verb",
-                  "vi": "nghiêm túc"
+                  "tone": "rènzhēn fùxí"
                 }
               ],
               "source": "Textbook alignment candidate batch 2 - needs human PDF/OCR verification",
-              "pinyin": "kǎoshì yǐqián yào rènzhēn fùxí",
-              "tone": "kǎoshì yǐqián yào rènzhēn fùxí"
+              "pinyin": "kǎoshì qián nǐ bìxū rènzhēn fùxí",
+              "tone": "kǎoshì qián nǐ bìxū rènzhēn fùxí"
             },
             {
               "stage": "mixed",
