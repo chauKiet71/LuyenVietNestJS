@@ -17,13 +17,13 @@ const i18n = {
     chooseSub: "Học theo giáo trình HSK hoặc luyện các chủ đề giao tiếp thường dùng.",
     hskTitle: "Khóa HSK",
     hskSub: "HSK2 đến HSK5, học theo từng bài trong giáo trình.",
-    dailyTitle: "Tiếng Trung thông dụng",
+    dailyTitle: "Tiếng Trung giao tiếp",
     dailySub: "Tình huống học tập, công việc và đời sống hằng ngày.",
     enter: "Vào học",
     continue: "Tiếp tục",
     path: "Lộ trình",
     hskCourse: "Chọn cấp độ và bài học HSK",
-    dailyCourse: "Chọn chủ đề tiếng Trung thông dụng",
+    dailyCourse: "Chọn chủ đề tiếng Trung giao tiếp",
     lesson: "Bài",
     translate: "Việt → Trung",
     dictation: "Nghe viết",
@@ -1719,8 +1719,8 @@ function renderDailyCourse() {
         </div>
 
         <div class="daily-banner-left">
-          <span class="daily-banner-tag">${isVi ? "TIẾNG TRUNG THÔNG DỤNG" : "常用中文"}</span>
-          <h1>${isVi ? "Chọn chủ đề tiếng Trung thông dụng" : "选择常用中文主题"}</h1>
+          <span class="daily-banner-tag">${isVi ? "TIẾNG TRUNG GIAO TIẾP" : "中文交流"}</span>
+          <h1>${isVi ? "Chọn chủ đề tiếng Trung giao tiếp" : "选择常用中文主题"}</h1>
           <p>${isVi ? "Chọn chủ đề phù hợp để bắt đầu luyện tập các đoạn hội thoại thực tế, nâng cao kỹ năng giao tiếp tiếng Trung mỗi ngày." : "选择合适的主题开始练习实际对话，每天提高您的中文沟通技巧。"}</p>
           
           <div class="daily-banner-stats">
