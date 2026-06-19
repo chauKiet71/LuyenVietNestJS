@@ -772,7 +772,7 @@ function renderChrome() {
     langToggle.innerHTML = `
       <span class="lang-vi ${state.lang === "vi" ? "active" : ""}">VI</span>
       <span class="lang-divider">|</span>
-      <span class="lang-en ${state.lang === "zh" ? "active" : ""}">EN</span>
+      <span class="lang-en ${state.lang === "zh" ? "active" : ""}">CN</span>
     `;
   }
 }

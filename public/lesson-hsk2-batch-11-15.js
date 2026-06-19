@@ -124,7 +124,7 @@
         item("word", "ngủ", "睡觉", [word("睡觉", "shuijiao", "shuì jiào", "verb", "ngủ")], s12),
         item("word", "phòng", "房间", [word("房间", "fangjian", "fáng jiān", "noun", "phòng")], s12),
         item("word", "tuyết rơi", "下雪", [word("下雪", "xiaxue", "xià xuě", "verb", "tuyết rơi")], s12),
-        item("word", "dậy giường", "起床", [word("起床", "qichuang", "qǐ chuáng", "verb", "dậy giường")], s12),
+        item("word", "thức dậy", "起床", [word("起床", "qichuang", "qǐ chuáng", "verb", "thức dậy")], s12),
         item("word", "nhà", "房子", [word("房子", "fangzi", "fáng zi", "noun", "nhà")], s12),
         item("word", "mặc", "穿", [word("穿", "chuan", "chuān", "verb", "mặc")], s12),
         item("word", "ít", "少", [word("少", "shao", "shǎo", "adj", "ít")], s12),
