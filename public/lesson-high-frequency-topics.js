@@ -4513,7 +4513,7 @@
                 "text": "找零",
                 "pinyin": "zhao ling",
                 "tone": "zhǎolíng",
-                "pos": "noun",
+                "pos": "verb",
                 "vi": "thối tiền"
               }
             ],
@@ -4864,8 +4864,8 @@
               },
               {
                 "text": "了",
-                "pinyin": "liao",
-                "tone": "liǎo",
+                "pinyin": "le",
+                "tone": "le",
                 "pos": "particle",
                 "vi": "rồi"
               }
@@ -5110,7 +5110,7 @@
                 "text": "找零",
                 "pinyin": "zhao ling",
                 "tone": "zhǎolíng",
-                "pos": "noun",
+                "pos": "verb",
                 "vi": "thối tiền"
               }
             ],
